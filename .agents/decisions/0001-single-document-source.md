@@ -1,27 +1,27 @@
 ---
 status: accepted
 ---
-# One source per kind of knowledge
+# Canonical documentation projections
 
 ## Decision
 
-Four kinds of individually reviewable Markdown source records drive the four human-facing generated documents:
+Four reviewable source record families define the human-facing repository documentation:
 
-| Source records | Eligible status | Generated artifact |
+| Canonical source | Required status | Generated artifact |
 | --- | --- | --- |
 | `.agents/notes/*.md` | `published` | `.agents/README.md` |
 | `.agents/requests/*.md` | `approved` | `.agents/PRD.md` |
 | `.agents/decisions/*.md` | `accepted` | `.agents/ARCHITECTURE.md` |
 | `.agents/rules/*.md` | `active` | `.agents/AGENTS.md` |
 
-All selected records require YAML-style front matter containing `status`. Unpublished notes do not contribute to README; `.agents/TODO.md` is a separate, non-generated task file. Other source directories reject files without status rather than silently hiding them. Records assemble in lexical filename order with source backlinks relative to the generated document.
+Records have status frontmatter and are assembled in filename order with backlinks. The dependency-free generator verifies the derived Markdown in CI. Root README and CONTRIBUTING are Git symlinks to generated `.agents/README.md` and `.agents/AGENTS.md`; there are no independently edited duplicates.
 
-Derived Markdown is committed for review and GitHub rendering, but is not edited independently. A dependency-free Python generator writes it deterministically, and CI rejects stale outputs using normal GitHub Actions workflow discovery. Root `README.md` and `CONTRIBUTING.md` are Git symlinks to `.agents/README.md` and `.agents/AGENTS.md` respectively; `.agents/` and `.github/` themselves are real directories.
+The **distributed product policy** `.agents/bundle/AGENTS.md` is a separate artifact from the **repository maintenance rules** `.agents/AGENTS.md`: these documents have different consumers and must not be conflated. The bundle compiler owns host ZIP generation.
 
 ## Rationale
 
-Separating the public project overview from normative requirements prevents the README from becoming an accidental competing PRD. Flat source folders avoid unnecessary nesting; clear ownership eliminates duplicated content and stale symlinks.
+One editorial owner per kind of knowledge prevents stale claims. Keeping product instructions independent avoids leaking repository maintenance or CI-specific rules into downstream users.
 
 ## Consequences
 
-Edit records and regenerate the derived documents in the same change. Draft, rejected and superseded records remain in history but do not appear as current specifications. Public notes are not authoritative product requirements; requirements are owned by requests.
+Edit records before projections, then run `python3 .github/scripts/generate_documents.py --write` and `--check`. `.agents/TODO.md` and `.agents/PLAN.md` are maintained directly. Unpublished notes do not appear in generated docs.
