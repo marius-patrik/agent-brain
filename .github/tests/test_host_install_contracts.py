@@ -44,7 +44,8 @@ class HostInstallationContracts(unittest.TestCase):
                         elif host=="claude":
                             plugin=json.loads((dest/".claude-plugin/plugin.json").read_text())
                             self.assertEqual(plugin["name"],"agent-os")
-                            self.assertTrue((dest/"CLAUDE.md").exists())
+                            self.assertFalse((dest/"CLAUDE.md").exists())
+                            self.assertEqual(plugin["author"]["name"], "Patrik Marius")
                         elif host=="pi":
                             package=json.loads((dest/"package.json").read_text())
                             self.assertEqual(package["pi"]["skills"],["./skills"])
