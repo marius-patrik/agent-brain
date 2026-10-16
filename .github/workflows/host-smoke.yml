@@ -81,6 +81,6 @@ jobs:
           cp .github/tests/dsh_provider_smoke.mjs "$RUNNER_TEMP/dsh-provider-test/smoke.mjs"
           cd "$RUNNER_TEMP/dsh-provider-test"
           npm init --yes >/dev/null
-          npm install --no-save @deepseek-ai/cordis@next @deepseek-ai/dsh-skill@next @deepseek-ai/dsh-skill-filesystem@next
+          npm install --no-save @deepseek-ai/dsh-skill-filesystem@next
           expected="$(python3 -c 'import json;print(json.dumps(json.load(open("'"$GITHUB_WORKSPACE"'/.agents/bundle/bundle.json"))["skills"]))')"
           node smoke.mjs "$RUNNER_TEMP/agent-os-host/.agents/skills" "$expected"
