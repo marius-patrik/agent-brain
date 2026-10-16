@@ -1,10 +1,10 @@
 ---
 status: published
 ---
-# DarkFactory integration and test ownership
+# Installation and runtime boundaries
 
-The repository's own agent guidance is in `.agents/` and GitHub automation is in `.github/`; neither is a symlink. The reusable DarkFactory project is pinned as a root submodule at `.darkfactory`. Update its commit pointer explicitly and keep the `.gitmodules` URL in sync.
+Each release archive contains a standard skills root, a host-specific manifest or directory layout, `INSTALL.md`, a source manifest, and the repository license. The bundle supplies **instructions only**, not credentials, executable third-party plugins, private services, or agent orchestration.
 
-All repository tests, fixtures, mocks, snapshots and test helpers are owned by `.github/tests/`. Do not put them in application packages, under the DarkFactory submodule or in separate root test folders.
+Claude Code and Codex plugin installation does not automatically install a project-specific `AGENTS.md` policy. In Claude Code, create `CLAUDE.md` in the consumer project (rather than in the plugin root) if that project should import `@AGENTS.md`. Pi package installation loads the declared skills; project policy is a separate step. DSH loads its project `.agents/skills` root when the filesystem skill provider and registry are mounted. Generic Open Agents-compatible consumers load project `AGENTS.md` and skills if supported.
 
-The default release strategy uses Git tags as the sole version authority. The optional `VERSION` file belongs to opt-in `file` mode and is automatically maintained by the PR workflow. GitHub Actions workflows are discoverable under `.github/workflows/`.
+`.github/` is an actual Git directory for repository CI and release; the pinned `.darkfactory` submodule is development tooling and is not copied into the output archives.

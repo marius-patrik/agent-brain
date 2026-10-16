@@ -1,23 +1,22 @@
 # Plan
 
-## Portable bundle release
+## Agent OS production bundle
 
-- [x] Define canonical AGENTS.md + Agent Skills source and explicit skill allowlist.
-- [x] Implement release layouts for Claude Code, Codex, Pi, DSH and generic Open Agents.
-- [x] Write reproducible compiler and ZIP integrity tests (structural only).
-- [ ] Run CI on feature PR and review host compatibility.
-- [ ] Merge into development, promote to main through the repository's established release path.
-- [ ] Verify published GitHub Release includes all five platform ZIPs and SHA256SUMS.
-- [ ] Benchmark baseline vs bundle on matched tasks and agents; record independent outcomes.
-- [ ] Enable controlled skill evolution only after independent regression and safety gates.
+- [x] Define canonical AGENTS.md and Agent Skills with explicit distribution allowlist.
+- [x] Compile and publish five deterministic platform-specific ZIPs and checksums.
+- [x] Keep inherited repository rules separate from the distributed operating contract.
+- [x] Align generated README/PRD/architecture, repo identity and contribution instructions with Agent OS.
+- [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
+- [ ] Verify Codex plugin discovery and DSH filesystem-provider discovery in live hosts.
+- [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
+- [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
+- [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
+- [ ] Inspect CI, release assets, issue state, all PRs and branch discrepancies after merge.
 
-## Constraints
+## Release discipline
 
-- No custom runtime or automatic installation of executable third-party plugins.
-- Generated release assets are derived from canonical, custom-owned source.
-- Preserve existing tag-only release/versioning and .github/tests-only test ownership.
-- Keep the real installation and performance evidence distinct; update the plan as verified milestones change.
+Feature and fix PRs target `development`; only `development` can target `main`. Source records must regenerate projections, checks stay green, and release tags/assets must be inspected before claiming completion.
 
-## Repository alignment
+## Evidence limits
 
-The repository was initialized from a general template. Template-specific generated product documentation and project identity remain a separate cleanup item. Do not claim those files represent the final agent-os specification while they remain unchanged.
+Archive integrity tests prove packaging; plugin discovery checks prove wiring; neither proves an improvement in agent task success. Model experiments require supported tools, credentials and independent outcome judges. Treat missing permissions as blockers.

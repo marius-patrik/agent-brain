@@ -50,7 +50,7 @@ def canonical() -> tuple[list[str], dict[str, bytes]]:
 INSTALL = {
     "open-agents": "Copy AGENTS.md and .agents/skills into your project; review and merge existing instructions rather than overwriting them.",
     "codex": "Install this directory as an Agent Plugins package or copy skills into .agents/skills. Merge AGENTS.md into project instructions separately; plugin installation alone does not apply project rules.",
-    "claude": "Install this folder as a Claude Code plugin or copy skills into .claude/skills. To apply project policy, copy and merge AGENTS.md and CLAUDE.md into the project root separately.",
+    "claude": "Install this folder as a Claude Code plugin or copy skills into .claude/skills. To apply project policy, merge AGENTS.md into the project root and create a project-root CLAUDE.md importing it with @AGENTS.md if needed.",
     "pi": "Extract the package and run pi install ./path/to/package (or use -l for project installation). Package skills load, but AGENTS.md must separately be integrated into project policy.",
     "dsh": "Copy AGENTS.md and .agents/skills into the project. Enable DSH skill registry, filesystem provider, and skill tool in your profile. This is a filesystem bundle, not a DSH executable plugin.",
 }
@@ -77,9 +77,9 @@ def compiled(host: str, tag: str, names: list[str], source: dict[str, bytes]) ->
     elif host == "claude":
         contents[".claude-plugin/plugin.json"] = (json.dumps({
             "name": "agent-os", "version": ver,
+            "author": {"name": "Patrik Marius"},
             "description": "Original coding-agent quality skills."
         }, indent=2) + "\n").encode()
-        contents["CLAUDE.md"] = b"@AGENTS.md\n"
     elif host == "pi":
         contents["package.json"] = (json.dumps({
             "name": "agent-os-pi", "version": ver, "private": True,

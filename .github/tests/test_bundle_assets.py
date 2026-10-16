@@ -45,7 +45,7 @@ class BundleAssetsTests(unittest.TestCase):
                     self.assertTrue(any(p.endswith("/SKILL.md") for p in members))
                     if host == "claude":
                         self.assertIn(".claude-plugin/plugin.json", members)
-                        self.assertEqual(archive.read("CLAUDE.md"), b"@AGENTS.md\n")
+                        self.assertNotIn("CLAUDE.md", members)
                     elif host == "codex":
                         self.assertIn("plugin.json", members)
                         self.assertIn("skills/skill-evolution/SKILL.md", members)
