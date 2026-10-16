@@ -9,6 +9,7 @@
 - [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
 - [x] Verify Codex plugin registration via native local marketplace and DSH skill loading via the native Context + SkillRegistry filesystem provider in CI.
 - [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
+- [ ] Confirm the GitHub Actions bot can create a reviewable development -> main promotion PR and dispatch the required checks; if blocked, enable the repository Actions PR-creation setting.
 - [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
 - [ ] Inspect CI, release assets, issue state, all PRs and branch discrepancies after merge.
