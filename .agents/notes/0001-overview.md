@@ -1,16 +1,18 @@
 ---
 status: published
 ---
-# Overview
+# Agent OS
 
-This repository is a technology-neutral starting point for projects coordinated by human contributors and AI coding agents. It supplies source-controlled product intent, architectural decisions, agent operating rules, reusable roles and procedures, and a minimal GitHub delivery pipeline. **It is a template, not an implemented application.**
+**Agent OS** is a custom-owned, vendor-neutral quality bundle for existing coding agents. It contains agent-operating guidance, selectively loaded Agent Skills, and role reference briefs—not a runtime, daemon, proxy, model, or unverified claim of improved benchmark performance.
 
-The public README is an overview of the repository and onboarding process, **not** the product requirements document. Requirements are authored in `.agents/requests/` and compiled into `.agents/PRD.md`; architecture is authored in `.agents/decisions/` and compiled into `.agents/ARCHITECTURE.md`.
+Build once from canonical sources, distribute platform-native ZIPs for **Codex, Claude Code, Pi, DeepSeek Harness (DSH), and generic AGENTS.md/Agent Skills clients**. The upstream projects referenced in `.agents/bundle/SOURCES.md` supply research ideas, not automatically installed dependencies.
 
-## Getting started
+## Get it
 
-1. Replace the starter goal in `.agents/GOAL.md` with a specific outcome and measurable acceptance criteria.
-2. Add an approved request to `.agents/requests/` and accepted architectural choices to `.agents/decisions/`.
-3. Adjust `.agents/rules/` for project-specific conventions, then select the relevant role and skill instructions.
-4. Regenerate committed docs: `python3 .github/scripts/generate_documents.py --write`.
-5. Verify: `python3 .github/scripts/generate_documents.py --check`, then the project's own build/test commands when an application exists.
+Download a host ZIP and `SHA256SUMS` from the [latest GitHub release](https://github.com/marius-patrik/agent-os/releases/latest). Read its `INSTALL.md`; integrate the project operating policy separately where the host only imports skills. Installed tools and account permissions remain under the host's control.
+
+## Verification status
+
+Release packaging is tested for reproducibility, manifest shape, file safety, integrity, and platform-specific entrypoints. **No independent agent task-success benchmark has established an uplift.** Host-level installation tests and matched baseline-versus-bundle evaluations must be reported separately with concrete evidence.
+
+See [bundle distributions](../../BUNDLES.md) and [benchmark protocol](../../BENCHMARKS.md).
