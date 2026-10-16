@@ -1,7 +1,7 @@
 ---
 status: approved
 ---
-# Product requirements: Agent OS
+# Product requirements: Agent Brain
 
 ## Goal
 

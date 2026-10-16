@@ -1,7 +1,7 @@
 {
   "managedBy": "DarkFactory",
   "schema": 2,
-  "slug": "marius-patrik/agent-os",
+  "slug": "marius-patrik/agent-brain",
   "sourceBranch": "main",
   "release": {
     "tag": "v0.291.6",
@@ -9,7 +9,7 @@
     "digest": "9b601ce17446348fbbac74597067855be7c05f004670cd14d9d77dd40ab545e0"
   },
   "fileHashes": {
-    "repo.dfconfig": "f93e1e087922df6a72876f75be0f78e0a87f1020113cda7a210d480b04ee918e",
+    "repo.dfconfig": "10853069b627bd58b09282ea64c217670edc0709201ebe00569942de0e48ef14",
     ".github/workflows/darkfactory-control.yml": "5576e69d4c28aea534989a0b76b06727af4e8df8a1f44405bf0668037771fa92"
   }
 }

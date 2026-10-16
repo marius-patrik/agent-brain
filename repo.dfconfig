@@ -1,10 +1,10 @@
 {
   "repo": {
-    "$comment": "Project identity and enforceable intent for Agent OS; branch protection still requires live GitHub administration.",
+    "$comment": "Project identity and enforceable intent for Agent Brain; branch protection still requires live GitHub administration.",
     "identity": {
       "owner": "marius-patrik",
-      "repo": "agent-os",
-      "display_name": "Agent OS",
+      "repo": "agent-brain",
+      "display_name": "Agent Brain",
       "default_branch": "main",
       "development_branch": "development",
       "project_title": "agent-os"
@@ -35,10 +35,10 @@
       "$comment": "Required live main protection is separately administered. Release PRs originate only from development."
     },
     "areas": {
-      "$comment": "Agent OS documentation and delivery ownership.",
+      "$comment": "Agent Brain documentation and delivery ownership.",
       "$default": "docs",
       "docs": {
-        "description": "Agent OS specifications, source instructions, agent skill catalog and project rules",
+        "description": "Agent Brain specifications, source instructions, agent skill catalog and project rules",
         "keywords": [
           "docs",
           "readme",
@@ -66,7 +66,8 @@
       "boards": [
         "Global",
         "agent-os"
-      ]
+      ],
+      "$comment": "GitHub Projects naming is independent of the renamed repository; do not change until the live project identity is verified."
     }
   },
   "docs": {},
