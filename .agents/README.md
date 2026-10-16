@@ -46,7 +46,7 @@ _Source: [0002-layout.md](notes/0002-layout.md)_
 
 ## Develop, validate and release
 
-Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development`. Preserve review and CI gates.
+Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development` and should be created by the GitHub Actions bot to permit independent owner review; the promotion workflow requires the repository's Actions setting that permits PR creation. If it is disabled, promotion fails visibly and requires a settings change rather than a human-authored or administrative bypass. Preserve review and CI gates.
 
 ```bash
 python3 .github/scripts/generate_documents.py --write
