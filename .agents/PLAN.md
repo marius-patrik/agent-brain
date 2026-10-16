@@ -5,8 +5,9 @@
 - [x] Define canonical AGENTS.md and Agent Skills with explicit distribution allowlist.
 - [x] Compile and publish five deterministic platform-specific ZIPs and checksums.
 - [x] Keep inherited repository rules separate from the distributed operating contract.
-- [ ] Align generated README/PRD/architecture, repo identity and contribution instructions with Agent OS.
-- [ ] Add explicit CI smoke checks for host skill discovery and distribution installation when possible without model authentication.
+- [x] Align generated README/PRD/architecture, repo identity and contribution instructions with Agent OS.
+- [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
+- [ ] Verify Codex plugin discovery and DSH filesystem-provider discovery in live hosts.
 - [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
 - [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
