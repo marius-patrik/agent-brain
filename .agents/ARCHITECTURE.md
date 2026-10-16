@@ -55,41 +55,37 @@ Changing modes is an explicit source/configuration change. Switching to `file` r
 _Source: [0002-development-and-release.md](decisions/0002-development-and-release.md)_
 
 
-## Agent roles and portable skills
+## One portable agent capability source
 
 ### Decision
 
-`.agents/agents/` contains lightweight role profiles (orchestrator, planner, implementer, reviewer and verifier), one Markdown document per role. A role describes authority, inputs, expected output and the handoff; it does not clone global rules.
+All distributed host variants compile from the single authored policy `.agents/bundle/AGENTS.md`, a sorted named allowlist `.agents/bundle/bundle.json`, the referenced `.agents/skills/<name>/SKILL.md` directories, and role reference Markdown under `.agents/bundle/roles/`. Keep workflow content vendor-neutral; host packaging is compiled and must not become independently maintained.
 
-`.agents/skills/<name>/SKILL.md` contains reusable, task-triggered procedures with standard `name` and `description` front matter. Skills cover repository orientation, requirements, architectural decisions, implementation verification, independent review, documentation generation and release checks.
+Repository-specific role profiles and operational guidance remain under `.agents/agents/` and generated `.agents/AGENTS.md`; these govern maintenance of this repository and are **not** silently bundled into consumers. Additional repository-local skills may exist but do not ship without explicit allowlisting.
 
-All roles inherit the binding constraints of generated `.agents/AGENTS.md`. Host runtimes may consume these files directly or map them into their own agent/skill registries; placing them here does not imply that a specific runner automatically loads them.
+Compile five host formats: Codex portable `plugin.json`, Claude Code `.claude-plugin/plugin.json`, Pi `package.json` with `pi.skills`, DSH native `.agents/skills` root, and generic AGENTS.md-compatible project layout. No host must be configured to use another agent's runtime.
 
 ### Rationale
 
-Separating roles from procedures enables composition and provider portability. A planner can use the requirements and architecture skills; a verifier can run implementation and release checks without sharing an implementer's incentives.
+Single ownership avoids copy drift, accidentally duplicated instructions, and accidental publishing of repo-only maintenance skills. Host adapters should only express genuine discovery differences.
 
-### Consequences
+### Verification
 
-A project may add or remove roles and skills based on actual needs. Keep them small, verifiable and grounded in the repository; do not add speculative personalities, redundant rule copies or vendor-specific tooling requirements.
+Static validation demonstrates structural compatibility, not behavioral impact. Require independent host discovery and benchmark results before asserting effectiveness.
 
 _Source: [0003-agent-roles-and-skills.md](decisions/0003-agent-roles-and-skills.md)_
 
 
-## Native repository directories and a pinned DarkFactory submodule
+## Repository-local automation is not part of the product bundle
 
 ### Decision
 
-Root `.agents/` and `.github/` are independent physical Git directories, not symlinks. `.agents/` owns project documentation, source records, role instructions and portable skills. `.github/` owns native GitHub Actions workflows, scripts, PR templates and the **sole test directory** `.github/tests/`.
+`.agents/` and `.github/` are real, independent Git directories. `.agents/` owns project requirements, decisions, published notes, contributor rules, reusable roles, distributed policy and Agent Skills. `.github/` owns native workflow definitions, packaging/release scripts, and all repository tests and fixtures under `.github/tests/`.
 
-The root path `.darkfactory` is reserved exclusively for the pinned Git submodule `https://github.com/marius-patrik/DarkFactory.git`. It is a Git tree entry with mode `160000`, not a locally authored metadata directory. Project tests and GitHub workflows are not stored in the submodule.
-
-### Rationale
-
-GitHub workflow discovery requires an actual `.github/workflows/` tree. A symlinked `.github` broke CI dispatch, releases and automatic preservation of the `development` branch. Restoring native directories fixes the discovery contract. A submodule retains reusable DarkFactory code without conflating external and local repository ownership.
+`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent OS ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
 
 ### Consequences
 
-Do not put test files outside `.github/tests/`. Ensure all internal workflow/script paths use native root locations. Advance the pinned submodule commit explicitly and reviewably, and use `git submodule update --init --recursive` if local tooling needs its content.
+Changes to a local workflow, repo configuration or submodule pin require review and verification. Packaging is owned solely by `.github/scripts/build_bundles.py`. Do not copy tests, credentials, repository metadata, or the submodule into release archives. All tests remain in `.github/tests/`.
 
 _Source: [0004-single-darkfactory-root.md](decisions/0004-single-darkfactory-root.md)_
