@@ -1,24 +1,21 @@
 ---
 status: published
 ---
-# Repository layout
+# Source ownership and layout
 
-| Path | Purpose |
+| Path | Contract |
 | --- | --- |
-| `.agents/GOAL.md` | Authored project goal and acceptance criteria |
-| `.agents/PLAN.md`, `.agents/TODO.md`, `.agents/SCRATCHPAD.md` | Authored execution and working state |
-| `.agents/PRD.md` | Generated from approved `.agents/requests/` |
-| `.agents/ARCHITECTURE.md` | Generated from accepted `.agents/decisions/` |
-| `.agents/AGENTS.md` | Generated from active `.agents/rules/` |
-| `.agents/README.md` | Generated from published `.agents/notes/` |
-| `.agents/agents/`, `.agents/skills/` | Reusable agent roles and task-specific procedures |
-| `.github/workflows/` | Native, discoverable GitHub Actions workflows |
-| `.github/scripts/` | Repository automation implementation |
-| `.github/tests/` | **Only** location for repository tests, fixtures, snapshots and helpers |
-| `.darkfactory` | Git submodule pointing to `marius-patrik/DarkFactory` |
-| `.gitmodules` | Submodule identity and URL |
-| `repo.dfconfig` | Repository identity, protection and versioning mode |
-| `VERSION` | Optional version file, present only in `file` mode |
-| `LICENSE` | GPL-3.0 |
+| `.agents/bundle/AGENTS.md` | Canonical **distributed** operating policy |
+| `.agents/bundle/bundle.json` | Explicit, sorted list of distributed skills |
+| `.agents/bundle/roles/` | Platform-neutral role briefs included as references |
+| `.agents/bundle/SOURCES.md` | Research provenance and license attribution |
+| `.agents/skills/*/SKILL.md` | Canonical Agent Skills; allowlist determines which ship |
+| `.github/scripts/build_bundles.py` | Deterministic host compiler, single owner of packaging |
+| `.github/tests/` | Exclusive home of all tests and fixtures |
+| `.github/workflows/release.yml` | Tagged asset creation and publication |
+| `.agents/requests/`, `.agents/decisions/`, `.agents/notes/`, `.agents/rules/` | Reviewed sources of project PRD, architecture, README and contributor guide |
+| `.agents/GOAL.md`, `.agents/PLAN.md`, `.agents/TODO.md` | Authoritative goal and active work state |
+| `repo.dfconfig` | DarkFactory integration and GitHub policy declaration |
+| `.darkfactory` | Pinned DarkFactory development-tooling submodule, not distributed |
 
-Root `README.md` and `CONTRIBUTING.md` are symlinks to generated files under `.agents/`; the `.agents/` and `.github/` directories themselves are real and tracked.
+Root README and CONTRIBUTING are symlinks to generated documents; generated Markdown is not a second editable source. Agent OS distributions never package DarkFactory or the repository's own generated project rules.
