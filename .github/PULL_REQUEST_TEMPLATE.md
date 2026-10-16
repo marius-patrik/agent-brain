@@ -1,19 +1,23 @@
-## Scope and source
+## Source and scope
 
-- Approved request or tracked issue:
-- Accepted decision(s), if any:
-- Target branch: `development` for ordinary work; `main` only from `development`.
+Closes #<issue> or Partial delivery: Advances #<issue>
+
+- Approved request or tracking issue:
+- Applicable accepted decision:
+- Target branch: `development` (only `development` may target `main`).
 
 ## Changes
 
-Describe precisely what changed and why.
+Summarize actual code, skill behavior and packaging differences.
 
 ## Verification
 
-- [ ] Generated README, PRD, architecture and agent guide are current (`python3 .github/scripts/generate_documents.py --check`).
-- [ ] Relevant tests/checks were run (name commands and results).
-- [ ] Remaining risks or deferred work are recorded.
+- [ ] Generated projections checked: `python3 .github/scripts/generate_documents.py --check`
+- [ ] Archive compilation checked: `python3 .github/scripts/build_bundles.py --tag v0.0.0 --check`
+- [ ] Relevant tests executed: `python3 -m unittest discover -s .github/tests -p 'test_*.py'`
+- [ ] Skill behavior/host discovery measured where claims are made; otherwise unverified is explicit.
+- [ ] Remaining gaps, risks, release implications and affected sources recorded.
 
 ## Release
 
-`VERSION` is automatically bumped once on same-repository PRs. Do not manually move existing release tags.
+The default version mode is **tags only**: do not bump a `VERSION` file or move existing immutable release tags. Artifacts are generated at release from merged `main`.
