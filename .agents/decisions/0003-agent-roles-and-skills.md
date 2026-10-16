@@ -1,20 +1,20 @@
 ---
 status: accepted
 ---
-# Agent roles and portable skills
+# One portable agent capability source
 
 ## Decision
 
-`.agents/agents/` contains lightweight role profiles (orchestrator, planner, implementer, reviewer and verifier), one Markdown document per role. A role describes authority, inputs, expected output and the handoff; it does not clone global rules.
+All distributed host variants compile from the single authored policy `.agents/bundle/AGENTS.md`, a sorted named allowlist `.agents/bundle/bundle.json`, the referenced `.agents/skills/<name>/SKILL.md` directories, and role reference Markdown under `.agents/bundle/roles/`. Keep workflow content vendor-neutral; host packaging is compiled and must not become independently maintained.
 
-`.agents/skills/<name>/SKILL.md` contains reusable, task-triggered procedures with standard `name` and `description` front matter. Skills cover repository orientation, requirements, architectural decisions, implementation verification, independent review, documentation generation and release checks.
+Repository-specific role profiles and operational guidance remain under `.agents/agents/` and generated `.agents/AGENTS.md`; these govern maintenance of this repository and are **not** silently bundled into consumers. Additional repository-local skills may exist but do not ship without explicit allowlisting.
 
-All roles inherit the binding constraints of generated `.agents/AGENTS.md`. Host runtimes may consume these files directly or map them into their own agent/skill registries; placing them here does not imply that a specific runner automatically loads them.
+Compile five host formats: Codex portable `plugin.json`, Claude Code `.claude-plugin/plugin.json`, Pi `package.json` with `pi.skills`, DSH native `.agents/skills` root, and generic AGENTS.md-compatible project layout. No host must be configured to use another agent's runtime.
 
 ## Rationale
 
-Separating roles from procedures enables composition and provider portability. A planner can use the requirements and architecture skills; a verifier can run implementation and release checks without sharing an implementer's incentives.
+Single ownership avoids copy drift, accidentally duplicated instructions, and accidental publishing of repo-only maintenance skills. Host adapters should only express genuine discovery differences.
 
-## Consequences
+## Verification
 
-A project may add or remove roles and skills based on actual needs. Keep them small, verifiable and grounded in the repository; do not add speculative personalities, redundant rule copies or vendor-specific tooling requirements.
+Static validation demonstrates structural compatibility, not behavioral impact. Require independent host discovery and benchmark results before asserting effectiveness.
