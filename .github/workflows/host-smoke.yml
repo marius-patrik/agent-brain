@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: [claude, pi]
+        host: [claude, pi, codex]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,3 +47,29 @@ jobs:
           pi list
           test -f .pi/settings.json
           grep -F 'agent-os-host' .pi/settings.json
+      - name: Register and install Codex plugin from local marketplace
+        if: matrix.host == 'codex'
+        env:
+          CI: 'true'
+        run: |
+          set -euo pipefail
+          npm install --global --ignore-scripts @openai/codex
+          export CODEX_HOME="$RUNNER_TEMP/codex-home"
+          mkdir -p "$CODEX_HOME" "$RUNNER_TEMP/codex-marketplace/plugins" "$RUNNER_TEMP/codex-marketplace/.agents/plugins"
+          mv "$RUNNER_TEMP/agent-os-host" "$RUNNER_TEMP/codex-marketplace/plugins/agent-os"
+          cat > "$RUNNER_TEMP/codex-marketplace/.agents/plugins/marketplace.json" <<'MARKETPLACE'
+          {
+            "name": "agent-os-smoke",
+            "plugins": [
+              {
+                "name": "agent-os",
+                "source": { "source": "local", "path": "./plugins/agent-os" },
+                "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+                "category": "Productivity"
+              }
+            ]
+          }
+          MARKETPLACE
+          codex plugin marketplace add "$RUNNER_TEMP/codex-marketplace"
+          codex plugin add agent-os@agent-os-smoke
+          codex plugin list
