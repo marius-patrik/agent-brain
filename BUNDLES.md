@@ -6,7 +6,7 @@
 | --- | --- |
 | `agent-os-open-agents-vX.Y.Z.zip` | Project `AGENTS.md` and `.agents/skills/` |
 | `agent-os-codex-vX.Y.Z.zip` | Root Agent Plugins `plugin.json`, `skills/` and separately applicable project `AGENTS.md` |
-| `agent-os-claude-vX.Y.Z.zip` | `.claude-plugin/plugin.json`, `skills/`, optional project `CLAUDE.md` that imports `AGENTS.md` |
+| `agent-os-claude-vX.Y.Z.zip` | `.claude-plugin/plugin.json`, `skills/`, project-managed `CLAUDE.md` importing `AGENTS.md` |
 | `agent-os-pi-vX.Y.Z.zip` | Pi `package.json` with `pi.skills` and `skills/` |
 | `agent-os-dsh-vX.Y.Z.zip` | Project `.agents/skills/` discovered by DSH filesystem skill provider |
 

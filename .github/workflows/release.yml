@@ -60,5 +60,20 @@ jobs:
           if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             gh release create "$RELEASE_TAG" --target "$GITHUB_SHA" --title "$RELEASE_TAG" --generate-notes
           fi
-          gh release upload "$RELEASE_TAG" dist/*.zip dist/SHA256SUMS --clobber
+          # Publishing a tag must never silently replace an existing immutable asset.
+          published="$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name')"
+          for file in dist/*.zip dist/SHA256SUMS; do
+            name="${file##*/}"
+            if grep -Fxq "$name" <<< "$published"; then
+              existing_dir="$(mktemp -d)"
+              gh release download "$RELEASE_TAG" --pattern "$name" --dir "$existing_dir"
+              cmp "$file" "$existing_dir/$name" || {
+                echo "::error::Immutable release asset differs: $name"
+                exit 1
+              }
+              rm -rf "$existing_dir"
+            else
+              gh release upload "$RELEASE_TAG" "$file"
+            fi
+          done
           gh release view "$RELEASE_TAG" --json tagName,url

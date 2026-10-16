@@ -1,18 +1,14 @@
 ---
 status: accepted
 ---
-# Native repository directories and a pinned DarkFactory submodule
+# Repository-local automation is not part of the product bundle
 
 ## Decision
 
-Root `.agents/` and `.github/` are independent physical Git directories, not symlinks. `.agents/` owns project documentation, source records, role instructions and portable skills. `.github/` owns native GitHub Actions workflows, scripts, PR templates and the **sole test directory** `.github/tests/`.
+`.agents/` and `.github/` are real, independent Git directories. `.agents/` owns project requirements, decisions, published notes, contributor rules, reusable roles, distributed policy and Agent Skills. `.github/` owns native workflow definitions, packaging/release scripts, and all repository tests and fixtures under `.github/tests/`.
 
-The root path `.darkfactory` is reserved exclusively for the pinned Git submodule `https://github.com/marius-patrik/DarkFactory.git`. It is a Git tree entry with mode `160000`, not a locally authored metadata directory. Project tests and GitHub workflows are not stored in the submodule.
-
-## Rationale
-
-GitHub workflow discovery requires an actual `.github/workflows/` tree. A symlinked `.github` broke CI dispatch, releases and automatic preservation of the `development` branch. Restoring native directories fixes the discovery contract. A submodule retains reusable DarkFactory code without conflating external and local repository ownership.
+`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent OS ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
 
 ## Consequences
 
-Do not put test files outside `.github/tests/`. Ensure all internal workflow/script paths use native root locations. Advance the pinned submodule commit explicitly and reviewably, and use `git submodule update --init --recursive` if local tooling needs its content.
+Changes to a local workflow, repo configuration or submodule pin require review and verification. Packaging is owned solely by `.github/scripts/build_bundles.py`. Do not copy tests, credentials, repository metadata, or the submodule into release archives. All tests remain in `.github/tests/`.

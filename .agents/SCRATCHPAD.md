@@ -1,3 +1,3 @@
 # Scratchpad
 
-Working notes only. Promote lasting requirements to `notes/requests/`, decisions to `notes/decisions/` and rules to `notes/rules/`. Clear obsolete notes instead of making this a second source of truth.
+Temporary working notes only. Promote approved requirements to `.agents/requests/`, decisions to `.agents/decisions/`, rules to `.agents/rules/`, and verified test evidence to `.github/tests/` or the tracked evaluation results. Avoid keeping obsolete notes.

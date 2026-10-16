@@ -1,18 +1,17 @@
 ---
 status: published
 ---
-# Contribution and releases
+# Develop, validate and release
 
-Propose focused changes into `development`. After review and required checks, promote `development` to `main` through a release PR. GitHub workflow definitions live directly at `.github/workflows/`.
-
-The default version mode is **tags only**. There is no `VERSION` file and PRs do not bump a version. A push to `main` computes the next SemVer patch from existing release tags, then publishes an immutable tag and GitHub Release. Projects can select `file` mode in `repo.dfconfig` and add `VERSION`; that mode uses the PR version-bump workflow and releases exactly the checked-in version.
-
-Verify locally:
+Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development`. Preserve review and CI gates.
 
 ```bash
 python3 .github/scripts/generate_documents.py --write
 python3 .github/scripts/generate_documents.py --check
+python3 .github/scripts/build_bundles.py --tag v0.0.0 --check
 python3 -m unittest discover -s .github/tests -p 'test_*.py'
 ```
 
-When access to the DarkFactory dependency is needed, run `git submodule update --init --recursive`. A submodule is pinned to an exact commit; it is not a replacement for the repository's own `.agents/` or `.github/`.
+The repository uses **Git-tag-derived SemVer**, with no required `VERSION` file. A successful push to `main` publishes platform ZIPs and checksum file in its GitHub Release. Compare the release tag SHA and every published asset against the merged commit. Never replace an earlier release's content silently.
+
+For skill changes, justify the trigger, run regression and negative-trigger cases, and record evidence. Structural packaging tests do not prove skill usefulness.

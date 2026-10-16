@@ -1,0 +1,49 @@
+name: Host package smoke tests
+on:
+  pull_request:
+    branches: [development, main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native-install:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        host: [claude, pi]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Compile reproducible host bundles
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/build_bundles.py --tag v0.0.0 --check
+          python3 .github/scripts/build_bundles.py --tag v0.0.0
+          mkdir -p "$RUNNER_TEMP/agent-os-host"
+          unzip -q "dist/agent-os-${{ matrix.host }}-v0.0.0.zip" -d "$RUNNER_TEMP/agent-os-host"
+      - name: Validate Claude plugin using native CLI
+        if: matrix.host == 'claude'
+        env:
+          CI: 'true'
+        run: |
+          set -euo pipefail
+          npm install --global @anthropic-ai/claude-code
+          claude plugin validate "$RUNNER_TEMP/agent-os-host" --strict
+      - name: Install and inspect Pi package using native CLI
+        if: matrix.host == 'pi'
+        env:
+          CI: 'true'
+        run: |
+          set -euo pipefail
+          npm install --global --ignore-scripts @mariozechner/pi-coding-agent
+          mkdir -p "$RUNNER_TEMP/agent-os-sandbox"
+          cd "$RUNNER_TEMP/agent-os-sandbox"
+          pi install -l "$RUNNER_TEMP/agent-os-host"
+          pi list
+          test -f .pi/settings.json
+          grep -F 'agent-os-host' .pi/settings.json
