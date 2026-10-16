@@ -1,6 +1,5 @@
 """Black-box archive installation contract checks, including negative routing and source ownership."""
 import json
-import os
 import tempfile
 import unittest
 import zipfile
@@ -18,7 +17,6 @@ class HostInstallationContracts(unittest.TestCase):
         selected=json.loads((ROOT / ".agents/bundle/bundle.json").read_text())["skills"]
         with tempfile.TemporaryDirectory() as output:
             artifacts=compiler.build("v8.6.1",Path(output))
-            self.assertEqual({p.name.split("-")[2] for p in artifacts if False},set())
             for artifact in artifacts:
                 with zipfile.ZipFile(artifact) as z:
                     manifest=json.loads(z.read("BUNDLE-MANIFEST.json"))
