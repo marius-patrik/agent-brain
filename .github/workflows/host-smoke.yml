@@ -32,7 +32,7 @@ jobs:
           CI: 'true'
         run: |
           set -euo pipefail
-          npm install --global --ignore-scripts @anthropic-ai/claude-code
+          npm install --global @anthropic-ai/claude-code
           claude plugin validate "$RUNNER_TEMP/agent-os-host" --strict
       - name: Install and inspect Pi package using native CLI
         if: matrix.host == 'pi'
