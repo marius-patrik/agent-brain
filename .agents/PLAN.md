@@ -7,7 +7,7 @@
 - [x] Keep inherited repository rules separate from the distributed operating contract.
 - [x] Align generated README/PRD/architecture, repo identity and contribution instructions with Agent OS.
 - [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
-- [ ] Verify Codex plugin discovery and DSH filesystem-provider discovery in live hosts.
+- [x] Verify Codex plugin registration via native local marketplace and DSH skill loading via the native Context + SkillRegistry filesystem provider in CI.
 - [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
 - [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
