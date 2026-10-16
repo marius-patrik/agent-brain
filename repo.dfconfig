@@ -1,13 +1,13 @@
 {
   "repo": {
-    "$comment": "Starter policy and repository identity. Review and replace project-specific values before installation; declarations do not configure GitHub protection by themselves.",
+    "$comment": "Project identity and enforceable intent for Agent OS; branch protection still requires live GitHub administration.",
     "identity": {
       "owner": "marius-patrik",
-      "repo": "template-repo",
-      "display_name": "Repository Template",
+      "repo": "agent-os",
+      "display_name": "Agent OS",
       "default_branch": "main",
       "development_branch": "development",
-      "project_title": "template-repo"
+      "project_title": "agent-os"
     },
     "license": {
       "spdx": "GPL-3.0",
@@ -38,7 +38,7 @@
       "$comment": "Replace with project-specific areas; only starter labels exist until then.",
       "$default": "docs",
       "docs": {
-        "description": "Documentation, requirements, architecture and rules",
+        "description": "Agent OS specifications, source instructions, agent skill catalog and project rules",
         "keywords": [
           "docs",
           "readme",
@@ -48,7 +48,7 @@
         ]
       },
       "ci": {
-        "description": "Continuous integration and release workflows",
+        "description": "CI, agent bundle compilation, installation contracts, release and benchmark verification",
         "keywords": [
           "ci",
           "action",
@@ -65,7 +65,7 @@
       "global": "Global",
       "boards": [
         "Global",
-        "template-repo"
+        "agent-os"
       ]
     }
   },
