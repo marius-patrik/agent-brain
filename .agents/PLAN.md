@@ -12,7 +12,8 @@
 - [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
 - [ ] Inspect CI, release assets, issue state, all PRs and branch discrepancies after merge.
-- [ ] Reconcile DarkFactory fleet receipt after the repository rename and address fleet rollout issues.
+- [x] Reconcile DarkFactory fleet receipt after the repository rename and pin the verified v0.292.3 upstream release.
+- [ ] Confirm DarkFactory v0.292.3 operates on the merged main branch and settle superseded fleet issues.
 
 ## Release discipline
 
