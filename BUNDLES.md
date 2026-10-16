@@ -1,14 +1,14 @@
-# Compiled agent-os distributions
+# Compiled agent-brain distributions
 
 **Agent Skills + AGENTS.md; no runtime.** The owner-controlled source lives at `.agents/bundle/AGENTS.md`, the explicit allowlist `.agents/bundle/bundle.json`, and `.agents/skills/*/SKILL.md`. The compiler produces independent ZIP archives. Do not independently edit host-specific copies.
 
 | Asset | Native packaging and setup |
 | --- | --- |
-| `agent-os-open-agents-vX.Y.Z.zip` | Project `AGENTS.md` and `.agents/skills/` |
-| `agent-os-codex-vX.Y.Z.zip` | Root Agent Plugins `plugin.json`, `skills/` and separately applicable project `AGENTS.md` |
-| `agent-os-claude-vX.Y.Z.zip` | `.claude-plugin/plugin.json`, `skills/`, project-managed `CLAUDE.md` importing `AGENTS.md` |
-| `agent-os-pi-vX.Y.Z.zip` | Pi `package.json` with `pi.skills` and `skills/` |
-| `agent-os-dsh-vX.Y.Z.zip` | Project `.agents/skills/` discovered by DSH filesystem skill provider |
+| `agent-brain-open-agents-vX.Y.Z.zip` | Project `AGENTS.md` and `.agents/skills/` |
+| `agent-brain-codex-vX.Y.Z.zip` | Root Agent Plugins `plugin.json`, `skills/` and separately applicable project `AGENTS.md` |
+| `agent-brain-claude-vX.Y.Z.zip` | `.claude-plugin/plugin.json`, `skills/`, project-managed `CLAUDE.md` importing `AGENTS.md` |
+| `agent-brain-pi-vX.Y.Z.zip` | Pi `package.json` with `pi.skills` and `skills/` |
+| `agent-brain-dsh-vX.Y.Z.zip` | Project `.agents/skills/` discovered by DSH filesystem skill provider |
 
 All archives contain `INSTALL.md`, role reference briefs, `SOURCES.md`, a `BUNDLE-MANIFEST.json` specifying the skill set and version, and the original GPL-3.0 license.
 

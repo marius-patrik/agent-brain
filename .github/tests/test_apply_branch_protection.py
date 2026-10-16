@@ -14,7 +14,7 @@ import apply_branch_protection as protection
 class BranchProtectionTests(unittest.TestCase):
     def test_policy_is_derived_from_repository_config(self) -> None:
         repo, branch, payload = protection.declared_policy()
-        self.assertEqual(repo, "marius-patrik/agent-os")
+        self.assertEqual(repo, "marius-patrik/agent-brain")
         self.assertEqual(branch, "main")
         self.assertEqual(set(payload["required_status_checks"]["contexts"]), {"main-source", "generated-docs"})
         self.assertTrue(payload["required_status_checks"]["strict"])

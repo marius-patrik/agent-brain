@@ -62,7 +62,7 @@ def compiled(host: str, tag: str, names: list[str], source: dict[str, bytes]) ->
         path = ".agents/" + key if key.startswith("skills/") and host in ("open-agents", "dsh") else key
         contents[path] = value
     contents["INSTALL.md"] = (
-        f"# agent-os / {host}\n\n{INSTALL[host]}\n\n"
+        f"# agent-brain / {host}\n\n{INSTALL[host]}\n\n"
         "No runtime, daemon, MCP server, credentials or executable plugin is installed.\n"
         "Use only within existing host security and approval policy.\n"
         "This candidate has NOT demonstrated performance improvement in agent task benchmarks.\n"
@@ -71,25 +71,25 @@ def compiled(host: str, tag: str, names: list[str], source: dict[str, bytes]) ->
     if host == "codex":
         contents["plugin.json"] = (json.dumps({
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-            "name": "agent-os", "version": ver,
+            "name": "agent-brain", "version": ver,
             "description": "Portable, original coding-agent quality skills."
         }, indent=2) + "\n").encode()
     elif host == "claude":
         contents[".claude-plugin/plugin.json"] = (json.dumps({
-            "name": "agent-os", "version": ver,
+            "name": "agent-brain", "version": ver,
             "author": {"name": "Patrik Marius"},
             "description": "Original coding-agent quality skills."
         }, indent=2) + "\n").encode()
     elif host == "pi":
         contents["package.json"] = (json.dumps({
-            "name": "agent-os-pi", "version": ver, "private": True,
+            "name": "agent-brain-pi", "version": ver, "private": True,
             "keywords": ["pi-package"], "pi": {"skills": ["./skills"]},
             "description": "Quality skill bundle for Pi."
         }, indent=2) + "\n").encode()
     contents["BUNDLE-MANIFEST.json"] = (json.dumps({
-        "name": "agent-os", "version": ver, "platform": host,
+        "name": "agent-brain", "version": ver, "platform": host,
         "skills": names, "evidence": "not-benchmarked",
-        "source": "https://github.com/marius-patrik/agent-os"
+        "source": "https://github.com/marius-patrik/agent-brain"
     }, sort_keys=True, indent=2) + "\n").encode()
     return contents
 
@@ -114,7 +114,7 @@ def build(tag: str, out: Path) -> list[Path]:
     out.mkdir(parents=True, exist_ok=True)
     assets = []
     for host in HOSTS:
-        path = out / f"agent-os-{host}-{tag}.zip"
+        path = out / f"agent-brain-{host}-{tag}.zip"
         path.write_bytes(zipped(compiled(host, tag, names, sources)))
         assets.append(path)
     (out / "SHA256SUMS").write_text(

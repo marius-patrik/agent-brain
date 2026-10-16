@@ -24,7 +24,7 @@ try {
     assert.ok(body.content.includes('#'), `Empty DSH loaded skill: ${entry.name}`)
     assert.equal(body.resourceBase.kind, 'directory')
   }
-  console.log(`DSH native registry discovered and loaded ${catalog.length} Agent OS skills`)
+  console.log(`DSH native registry discovered and loaded ${catalog.length} Agent Brain skills`)
 } finally {
   await ctx.fiber.dispose()
 }

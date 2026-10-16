@@ -1,13 +1,13 @@
 # Controlled agent-quality evaluation
 
-**Status:** Native Claude Code plugin validation and Pi package installation are CI-tested; task-success improvement of Agent OS is **not established**. Structural smoke tests are not a benchmark.
+**Status:** Native Claude Code plugin validation and Pi package installation are CI-tested; task-success improvement of Agent Brain is **not established**. Structural smoke tests are not a benchmark.
 
 ## Experimental protocol
 
 Use an established, externally judged coding benchmark (preferably SWE-bench Verified or an independently designed repository task corpus). Each *paired* task/trial must run the same host, exact model revision, tool permissions, repository snapshot, execution budget and isolated environment in both conditions. Randomize arm order; score outcomes using hidden tests or independently executed behavioral validators rather than the agent's own explanation.
 
-- **Baseline:** host without Agent OS enabled.
-- **Candidate:** identical host with the exact versioned Agent OS ZIP installed and consumer operating policy applied.
+- **Baseline:** host without Agent Brain enabled.
+- **Candidate:** identical host with the exact versioned Agent Brain ZIP installed and consumer operating policy applied.
 - **Scope:** at least 30 paired trials per `host/model/snapshot` cohort, across representative task classes; rerun across multiple models before generalizing.
 - **Metrics:** functional pass rate (primary), unsafe actions, token consumption, elapsed seconds, cost where available, tool failures and skill routing mistakes.
 - **Reproducibility:** preserve exact task IDs, source snapshots, environment, model configuration, transcripts with secrets redacted, hidden test command hashes and runner versions.

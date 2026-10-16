@@ -86,3 +86,18 @@ _Source: [0003-agent-roles-and-skills.md](decisions/0003-agent-roles-and-skills.
 Changes to a local workflow, repo configuration or submodule pin require review and verification. Packaging is owned solely by `.github/scripts/build_bundles.py`. Do not copy tests, credentials, repository metadata, or the submodule into release archives. All tests remain in `.github/tests/`.
 
 _Source: [0004-single-darkfactory-root.md](decisions/0004-single-darkfactory-root.md)_
+
+
+## Agent Brain repository and package identity
+
+### Decision
+
+The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published `agent-os` releases remain immutable historical artifacts; no alias or transitional production implementation is introduced.
+
+Synchronize the actual GitHub repository name with `repo.dfconfig.repo.identity.repo`, the managed DarkFactory installation receipt slug and its source hashes, the compiler package identity, the host installation smoke tests, the README and the release catalog. A repository rename does not implicitly rename an independent GitHub Projects board; the configured board and project title must reflect its real live name, not a guessed rename.
+
+### Consequences
+
+Generated documents change only through canonical source records. A version bump is generated from `main` on release, with a new set of assets. Asset names and package identity must match, while all five host-specific installation contracts remain independently verified.
+
+_Source: [0005-agent-brain-identity.md](decisions/0005-agent-brain-identity.md)_
