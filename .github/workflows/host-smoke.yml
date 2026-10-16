@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: [claude, pi, codex]
+        host: [claude, pi, codex, dsh]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -73,3 +73,14 @@ jobs:
           codex plugin marketplace add "$RUNNER_TEMP/codex-marketplace"
           codex plugin add agent-os@agent-os-smoke
           codex plugin list
+      - name: Discover and load native DSH filesystem skills
+        if: matrix.host == 'dsh'
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/dsh-provider-test"
+          cp .github/tests/dsh_provider_smoke.mjs "$RUNNER_TEMP/dsh-provider-test/smoke.mjs"
+          cd "$RUNNER_TEMP/dsh-provider-test"
+          npm init --yes >/dev/null
+          npm install --no-save @deepseek-ai/dsh-skill-filesystem@next
+          expected="$(python3 -c 'import json;print(json.dumps(json.load(open("'"$GITHUB_WORKSPACE"'/.agents/bundle/bundle.json"))["skills"]))')"
+          node smoke.mjs "$RUNNER_TEMP/agent-os-host/.agents/skills" "$expected"
