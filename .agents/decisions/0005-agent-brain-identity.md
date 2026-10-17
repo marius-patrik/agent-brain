@@ -5,7 +5,7 @@ status: accepted
 
 ## Decision
 
-The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published `agent-os` releases remain immutable historical artifacts; no alias or transitional production implementation is introduced.
+The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published release tags and assets remain immutable; no alias or transitional production implementation is introduced.
 
 Synchronize the actual GitHub repository name with `repo.dfconfig.repo.identity.repo`, the managed DarkFactory installation receipt slug and its source hashes, the compiler package identity, the host installation smoke tests, the README and the release catalog. A repository rename does not implicitly rename an independent GitHub Projects board; the configured board and project title must reflect its real live name, not a guessed rename.
 

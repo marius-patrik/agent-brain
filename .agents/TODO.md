@@ -2,6 +2,7 @@
 
 - [x] Validate native Claude Code plugin and install the Pi package using CI host CLIs.
 - [x] Verify Codex native marketplace registration and DSH native skill discovery/loading in CI.
-- [ ] Execute independently scored matched baseline-vs-bundle agent tasks and record results.
-- [ ] Verify live `main` branch protection is enforced by GitHub; declarations and CI alone are insufficient.
-- [ ] Promote candidate skill improvements only after positive/negative trigger, correctness and safety regression evaluation.
+- [ ] **#14:** Enable GitHub Actions PR creation, enforce `main` protection, approve bot-authored promotion, and verify the resulting release.
+- [ ] **#9:** Verify pinned DarkFactory v0.292.3 on released `main`, then reconcile the fleet issue.
+- [ ] **#2:** Execute controlled, independently scored agent baseline-versus-bundle tasks on supported hosts and report measured results. Skill changes require positive/negative-trigger and safety regression evidence.
+- [ ] Verify the actual GitHub Projects board title before changing the separate `agent-os` board reference in `repo.dfconfig`.

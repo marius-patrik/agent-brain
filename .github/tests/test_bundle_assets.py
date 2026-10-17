@@ -29,7 +29,7 @@ class BundleAssetsTests(unittest.TestCase):
                     meta = json.loads(z.read("BUNDLE-MANIFEST.json"))
                     self.assertEqual(meta["version"], "3.2.1")
                     self.assertEqual(meta["evidence"], "not-benchmarked")
-                    self.assertEqual(len(meta["skills"]), 11)
+                    self.assertEqual(meta["skills"], json.loads((ROOT / ".agents/bundle/bundle.json").read_text(encoding="utf-8"))["skills"])
             self.assertEqual((Path(one) / "SHA256SUMS").read_bytes(),
                              (Path(two) / "SHA256SUMS").read_bytes())
 

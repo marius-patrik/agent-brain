@@ -1,6 +1,6 @@
 # Controlled agent-quality evaluation
 
-**Status:** Native Claude Code plugin validation and Pi package installation are CI-tested; task-success improvement of Agent Brain is **not established**. Structural smoke tests are not a benchmark.
+**Status:** All four dedicated hosts have passed native installation/discovery checks in CI: Claude Code plugin validation, Codex plugin registration, Pi package installation and DeepSeek Harness filesystem-provider skill loading. The generic Open Agents archive has structural tests. **No agent task-success improvement has been measured.** Installation tests are not a benchmark.
 
 ## Experimental protocol
 
