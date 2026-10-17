@@ -87,7 +87,7 @@ class QualityFocusCatalogTests(unittest.TestCase):
         self.assertIn("Do not", divergence)
         self.assertIn("three candidates", divergence)
         self.assertIn("Do **not** invent a parallel board", continuity)
-        self.assertIn("No change:", quality)
+        self.assertIn("**No change:**", quality)
 
 
 if __name__ == "__main__":
