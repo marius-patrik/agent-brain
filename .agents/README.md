@@ -11,13 +11,13 @@ Build once from canonical sources, distribute platform-native ZIPs for **Codex, 
 
 ### Get it
 
-Download a host ZIP and `SHA256SUMS` from the [latest GitHub release](https://github.com/marius-patrik/agent-brain/releases/latest). Read its `INSTALL.md`; integrate the project operating policy separately where the host only imports skills. Installed tools and account permissions remain under the host's control.
+Download a host ZIP and `SHA256SUMS` from the [GitHub releases](https://github.com/marius-patrik/agent-brain/releases). Check the filenames of the **actually published** assets: repository changes on `development` are not available as release archives until approved and merged into `main`. Read each archive's `INSTALL.md`; integrate project operating policy separately where a host imports only skills. Host permissions and connected tools remain under the host's control.
 
 ### Verification status
 
 Release packaging is tested for reproducibility, manifest shape, file safety, integrity, and platform-specific entrypoints. **No independent agent task-success benchmark has established an uplift.** Host-level installation tests and matched baseline-versus-bundle evaluations must be reported separately with concrete evidence.
 
-See [bundle distributions](../../BUNDLES.md) and [benchmark protocol](../../BENCHMARKS.md).
+See the [bundle distributions](https://github.com/marius-patrik/agent-brain/blob/development/BUNDLES.md) and [benchmark protocol](https://github.com/marius-patrik/agent-brain/blob/development/BENCHMARKS.md).
 
 _Source: [0001-overview.md](notes/0001-overview.md)_
 
@@ -46,7 +46,7 @@ _Source: [0002-layout.md](notes/0002-layout.md)_
 
 ## Develop, validate and release
 
-Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development` and should be created by the GitHub Actions bot to permit independent owner review; the promotion workflow requires the repository's Actions setting that permits PR creation. If it is disabled, promotion fails visibly and requires a settings change rather than a human-authored or administrative bypass. Preserve review and CI gates.
+Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development` and should be created by the GitHub Actions bot to permit independent owner review; the promotion workflow requires an administrator to enable GitHub Actions pull-request creation. This setting is not enabled in the observed repository; an unsuccessful bot PR run is not a published release. Until the setting and native `main` protection are verified, leave release promotion pending rather than using an administrative bypass. Preserve review and CI gates.
 
 ```bash
 python3 .github/scripts/generate_documents.py --write
@@ -71,7 +71,7 @@ python3 .github/scripts/apply_branch_protection.py
 python3 .github/scripts/apply_branch_protection.py --apply
 ```
 
-Require appropriate reviews and green checks; the repository's main-source workflow additionally enforces that release PRs come only from `development`. If GitHub reports `main.protected = false`, protection remains an administrative blocker, not a completed task.
+Also enable **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests** so the bot can author (not automatically approve) the `development` → `main` PR. The repository's main-source workflow additionally checks that release PRs originate only from `development`. The GitHub integration cannot change either administrative setting; until `main.protected` is true and a real bot PR is created, promotion remains blocked. See [issue #14](https://github.com/marius-patrik/agent-brain/issues/14).
 
 _Source: [0004-administration.md](notes/0004-administration.md)_
 

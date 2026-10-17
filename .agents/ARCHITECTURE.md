@@ -35,7 +35,7 @@ _Source: [0001-single-document-source.md](decisions/0001-single-document-source.
 
 ### Decision
 
-`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. The release-promotion workflow uses the GitHub Actions bot identity so the repository owner can independently review and approve the PR; a user-authored promotion PR cannot be approved by its own author. Because `GITHUB_TOKEN`-created PRs do not automatically trigger downstream pull-request workflows, the automation explicitly dispatches required checks on the same head SHA. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
+`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. The release-promotion workflow attempts to create a GitHub Actions bot-authored PR, allowing an independent human owner review. It **cannot operate** until the repository administrator enables GitHub Actions to create pull requests; a user-authored promotion cannot satisfy its own independent approval. When enabled, the workflow dispatches checks on the `development` head SHA because `GITHUB_TOKEN`-created PRs do not trigger normal `pull_request` workflows. A green check or configuration declaration never substitutes for live GitHub branch protection. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
 
 The active `repo.versioning.mode` is `tags`: there is no required `VERSION` file. On push to `main`, resolve a SemVer tag already pointing at that commit or compute the next patch release tag. Tags must never move to a different commit. The release job generates five host-specific archives plus checksums from the merged source and publishes them. Existing published asset bytes must match fresh builds on reruns; mismatches are errors, not grounds for overwriting an immutable release.
 
@@ -79,7 +79,7 @@ _Source: [0003-agent-roles-and-skills.md](decisions/0003-agent-roles-and-skills.
 
 `.agents/` and `.github/` are real, independent Git directories. `.agents/` owns project requirements, decisions, published notes, contributor rules, reusable roles, distributed policy and Agent Skills. `.github/` owns native workflow definitions, packaging/release scripts, and all repository tests and fixtures under `.github/tests/`.
 
-`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent OS ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
+`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent Brain ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
 
 ### Consequences
 
@@ -92,7 +92,7 @@ _Source: [0004-single-darkfactory-root.md](decisions/0004-single-darkfactory-roo
 
 ### Decision
 
-The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published `agent-os` releases remain immutable historical artifacts; no alias or transitional production implementation is introduced.
+The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published release tags and assets remain immutable; no alias or transitional production implementation is introduced.
 
 Synchronize the actual GitHub repository name with `repo.dfconfig.repo.identity.repo`, the managed DarkFactory installation receipt slug and its source hashes, the compiler package identity, the host installation smoke tests, the README and the release catalog. A repository rename does not implicitly rename an independent GitHub Projects board; the configured board and project title must reflect its real live name, not a guessed rename.
 
