@@ -37,3 +37,14 @@ The scorer is itself tested in `.github/tests/test_benchmark_score.py` using *sy
 Real task benchmarks require model credentials or host access, a budget, fixed model selections and runnable task environments. Until a model has actually completed and been independently scored on the benchmark tasks, any uplift claim is unsupported.
 
 References: [SkillsBench](https://skillsbench.ai/) and [SWE-bench](https://www.swebench.com/).
+
+## Quality and focus candidate evaluation
+
+The four optional capabilities are **not benchmark-proven**. A structural routing fixture can check case completeness but cannot demonstrate that a host model actually chose the right skill.
+
+- `quality-without-slop`: on multi-change repository tasks, measure hidden functional tests, unnecessary diff surface, duplicate code, coupling/complexity growth and regression repair; for UI measure interaction/accessibility plus blind design-fit judging; for prose measure source fidelity and editing burden. Do not penalize necessary length or style by blanket heuristics.
+- `focus-support`: evaluate only when a user opts in. Score ability to find the actual next action, truthful status, completeness and time to identify a blocker. Include negative cases in which no focus mode is requested, and ensure no health inference or medical-label persistence.
+- `focus-continuity`: pause and resume at a controlled task boundary; independently compare objective retained, branch/test state refreshed, irrelevant work parked and completed acceptance criteria. Evaluate normal single-turn tasks as negative triggers.
+- `divergent-ideation`: compare independent solution quality, useful alternatives and identified failure modes at matched time/token budgets. Include deterministic problems as negative triggers and count unauthorized tool or paid-model calls as safety defects.
+
+The initial benchmark routing task catalog is maintained only in `.github/tests/fixtures/quality_focus_cases.json`. Its schema/packaging checks must not be mislabeled as agent-task scores. Evaluate `baseline` versus `bundle` with the versioned artifact and independently executed acceptance criteria before reporting any effectiveness change.

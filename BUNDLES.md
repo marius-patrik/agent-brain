@@ -30,3 +30,9 @@ cd dist && sha256sum --check SHA256SUMS
 The package currently has **no controlled agent benchmark results**. Packaging checks establish archive consistency, not improved agent behavior. Before claiming an advantage, compare baseline and bundled agents using matched model, task, snapshot, tools, budgets and independent success criteria. Candidate skill evolution must pass both positive and negative routing tests, with no safety regressions.
 
 See [evaluation contract](BENCHMARKS.md).
+
+### Candidate quality and focus skills
+
+The standard distributed catalog includes `quality-without-slop`, `focus-support`, `focus-continuity` and `divergent-ideation`. `focus-support` is user-opt-in: installation is **not** permission to infer ADHD, medical conditions, or apply a compulsory reply style. `focus-continuity` shares the existing plan and handoff sources. `divergent-ideation` respects finite budgets and uses existing host delegation only when available. None installs a runtime or background agent.
+
+Routing and outcome evaluations for these candidate additions remain separate from native installation checks. See [benchmark protocol](BENCHMARKS.md).

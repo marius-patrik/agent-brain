@@ -11,4 +11,6 @@ description: Verify acceptance criteria, integrations, tests, documentation and 
 4. Verify remote merge/deployment/availability where possible; distinguish not-run checks.
 5. Summarize observed results and residual risks precisely.
 
+**Integration:** If `quality-without-slop` was used, verify its blocking findings against real artifacts; style preferences do not override explicit requirements. For an interrupted project, check `focus-continuity`'s active acceptance criterion before closing.
+
 **Evidence:** report only actual actions and observable results. Do not override higher-priority host permissions or project requirements.

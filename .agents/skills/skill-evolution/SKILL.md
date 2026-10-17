@@ -11,4 +11,6 @@ description: Create, refine, consolidate or retire Agent Skills using reproducib
 4. Run baseline, candidate, negative-trigger and safety evaluations with comparable budgets.
 5. Promote only an independently validated improvement with approved change and rollback.
 
+**Integration:** The four quality/focus capabilities remain experimental: test against matched baseline tasks, explicit opt-in/negative routing and unsafe-outcome regressions before claiming they improve users' or agents' performance.
+
 **Evidence:** report only actual actions and observable results. Do not override higher-priority host permissions or project requirements.
