@@ -9,10 +9,10 @@ Build once from canonical sources, distribute platform-native ZIPs for **Codex, 
 
 ## Get it
 
-Download a host ZIP and `SHA256SUMS` from the [latest GitHub release](https://github.com/marius-patrik/agent-brain/releases/latest). Read its `INSTALL.md`; integrate the project operating policy separately where the host only imports skills. Installed tools and account permissions remain under the host's control.
+Download a host ZIP and `SHA256SUMS` from the [GitHub releases](https://github.com/marius-patrik/agent-brain/releases). Check the filenames of the **actually published** assets: repository changes on `development` are not available as release archives until approved and merged into `main`. Read each archive's `INSTALL.md`; integrate project operating policy separately where a host imports only skills. Host permissions and connected tools remain under the host's control.
 
 ## Verification status
 
 Release packaging is tested for reproducibility, manifest shape, file safety, integrity, and platform-specific entrypoints. **No independent agent task-success benchmark has established an uplift.** Host-level installation tests and matched baseline-versus-bundle evaluations must be reported separately with concrete evidence.
 
-See [bundle distributions](../../BUNDLES.md) and [benchmark protocol](../../BENCHMARKS.md).
+See the [bundle distributions](https://github.com/marius-patrik/agent-brain/blob/development/BUNDLES.md) and [benchmark protocol](https://github.com/marius-patrik/agent-brain/blob/development/BENCHMARKS.md).

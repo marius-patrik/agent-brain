@@ -10,4 +10,4 @@ python3 .github/scripts/apply_branch_protection.py
 python3 .github/scripts/apply_branch_protection.py --apply
 ```
 
-Require appropriate reviews and green checks; the repository's main-source workflow additionally enforces that release PRs come only from `development`. If GitHub reports `main.protected = false`, protection remains an administrative blocker, not a completed task.
+Also enable **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests** so the bot can author (not automatically approve) the `development` → `main` PR. The repository's main-source workflow additionally checks that release PRs originate only from `development`. The GitHub integration cannot change either administrative setting; until `main.protected` is true and a real bot PR is created, promotion remains blocked. See [issue #14](https://github.com/marius-patrik/agent-brain/issues/14).

@@ -7,7 +7,7 @@ status: accepted
 
 `.agents/` and `.github/` are real, independent Git directories. `.agents/` owns project requirements, decisions, published notes, contributor rules, reusable roles, distributed policy and Agent Skills. `.github/` owns native workflow definitions, packaging/release scripts, and all repository tests and fixtures under `.github/tests/`.
 
-`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent OS ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
+`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent Brain ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
 
 ## Consequences
 

@@ -23,7 +23,7 @@ python3 .github/scripts/build_bundles.py --tag v0.0.0
 cd dist && sha256sum --check SHA256SUMS
 ```
 
-`dist/` contains five deterministic ZIPs and `SHA256SUMS`. The repository's existing **tag-only** release pipeline resolves an immutable SemVer tag on a merged `main` commit, compiles archives with that tag, checks their hashes and uploads them to GitHub Releases. No `VERSION` file is required.
+`dist/` contains five deterministic ZIPs and `SHA256SUMS`. In a reviewed merge to `main`, the **tag-only** release workflow resolves the next immutable SemVer tag, builds assets from that exact commit, checks their hashes and uploads them. No `VERSION` file is required. Asset tables describe the build contract, **not** a claim that the `agent-brain-*` files are already published; inspect the [actual releases](https://github.com/marius-patrik/agent-brain/releases).
 
 ### Performance gate
 

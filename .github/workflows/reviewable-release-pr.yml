@@ -42,9 +42,12 @@ jobs:
             number="$(jq -r '.number' <<< "$pr")"
             echo "Bot-authored PR #$number already exists; refreshing manual checks."
           else
-            gh pr create --repo "$REPO" --base main --head development \
+            if ! gh pr create --repo "$REPO" --base main --head development \
               --title "Review and release development to main" \
-              --body "Bot-authored main release promotion. The sole source is the current development branch. Review actual diff and checks before approving; release occurs only after merge to main. AGENTS.md and Agent Skills are bundled from canonical sources; do not claim benchmark gains without model trials."
+              --body "Bot-authored main release promotion. The sole source is the current development branch. Review actual diff and checks before approving; release occurs only after merge to main. AGENTS.md and Agent Skills are bundled from canonical sources; do not claim benchmark gains without model trials."; then
+              echo "::error::GitHub blocked bot PR creation. Enable Settings > Actions > General > Workflow permissions > Allow GitHub Actions to create and approve pull requests (issue #14). Do not bypass human review."
+              exit 1
+            fi
             number="$(gh pr list --repo "$REPO" --base main --head development --state open --json number --jq '.[0].number')"
             test -n "$number"
             echo "Opened reviewable bot-authored PR #$number"
