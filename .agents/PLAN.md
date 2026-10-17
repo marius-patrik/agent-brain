@@ -24,3 +24,10 @@ Feature and fix PRs target `development`; only `development` can target `main`. 
 ## Evidence limits
 
 Archive integrity tests prove packaging; plugin discovery checks prove wiring; neither proves an improvement in agent task success. Model experiments require supported tools, credentials and independent outcome judges. Treat missing permissions as blockers.
+
+## Quality and focus extensions — #17
+
+- [x] Define four independent, custom-owned, portable quality/focus skill procedures and integrate them into existing capability owners.
+- [ ] Validate candidate skill routing using positive and negative examples and host-level evaluation; distinguish fixture/packaging tests from actual agent behavior.
+- [ ] Run paired task-quality comparisons, including code-change complexity, UI usability, source fidelity, goal resumption accuracy, user-requested reply usability and cost-matched ideation.
+- [ ] Promote the reviewed candidate changes through the repository's release gate. No behavioral uplift is claimed until independently measured.

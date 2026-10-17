@@ -10,4 +10,6 @@ description: Coordinate independent agents or reviewers with explicit ownership,
 3. Use parallel read-only investigation; require exclusive writing scopes for changes.
 4. Independently verify and integrate results; finish with combined checks.
 
+**Integration:** `divergent-ideation` may use these delegation boundaries for independent alternatives, but a host without workers must run sequentially. Do not claim isolated parallel reasoning or expend unapproved paid-agent budgets.
+
 **Evidence:** report only actual actions and observable results. Do not override higher-priority host permissions or project requirements.

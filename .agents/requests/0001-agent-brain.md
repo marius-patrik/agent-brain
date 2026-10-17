@@ -27,3 +27,12 @@ Provide a lightweight, custom-owned collection of Agent Skills, behavioral guida
 - Default versioning is immutable SemVer tags derived on `main` from existing release tags, not a compulsory `VERSION` file; an explicit opt-in file mode may remain supported.
 - Preserve actual GitHub protection and human review gates; do not treat a configuration declaration as enforcement.
 - Keep the pinned DarkFactory submodule separate from distributed product assets and do not ship its runtime.
+
+## Evidence-gated quality and focus
+
+- Ship one custom-owned `quality-without-slop` review procedure covering code maintainability, actual UI usability/design fit, and factual writing fidelity, without blanket bans or speculative cleanup.
+- Provide an **optional**, explicitly requested `focus-support` presentation capability that preserves full technical accuracy and never infers ADHD or other diagnoses.
+- Provide `focus-continuity` for multi-session work, interruption recovery, backlog parking and verified progress, composing with existing `adaptive-plan` and `context-handoff` rather than duplicating state.
+- Provide `divergent-ideation` only for meaningful open choices, with independent alternatives, failure-case critique, bounded options, authorization-aware compute costs and a convergent recommendation.
+- Use host-native capabilities, not a new agent runtime. Keep all four in the single distributed allowlist and package them identically for five hosts.
+- Publish evaluation-ready positive and negative routing cases, independent quality outcomes and cost/safety measures. A skill may ship as a **candidate** before it earns evidence for performance claims.
