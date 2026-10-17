@@ -41,6 +41,8 @@ def canonical() -> tuple[list[str], dict[str, bytes]]:
             if file.is_file():
                 files[f"skills/{name}/{file.relative_to(root).as_posix()}"] = file.read_bytes()
     for file in sorted((SOURCE / "roles").glob("*.md")):
+        if file.is_symlink() or not file.is_file():
+            raise ValueError(f"Unsafe role reference: {file}")
         files[f"roles/{file.name}"] = file.read_bytes()
     files["SOURCES.md"] = (SOURCE / "SOURCES.md").read_bytes()
     files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
