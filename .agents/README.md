@@ -19,6 +19,12 @@ Release packaging is tested for reproducibility, manifest shape, file safety, in
 
 See the [bundle distributions](https://github.com/marius-patrik/agent-brain/blob/main/BUNDLES.md) and [benchmark protocol](https://github.com/marius-patrik/agent-brain/blob/main/BENCHMARKS.md).
 
+### Quality and focus capabilities
+
+Four additional candidate skills cover artifact-specific slop prevention (`quality-without-slop`), **opt-in** action-first replies (`focus-support`), interrupted-task goal continuity (`focus-continuity`), and bounded exploration of high-uncertainty choices (`divergent-ideation`). They compose with existing review, planning, handoff and delegation skills rather than supplying separate runtimes. Focus-friendly output does not assume a diagnosis, and ideation must respect the host's cost/permission limits.
+
+These skills are compiled from the same canonical catalog. Native installation validation and task-performance benchmarks are different gates; additions to `development` are **not** published until reviewed and merged into `main`.
+
 _Source: [0001-overview.md](notes/0001-overview.md)_
 
 
