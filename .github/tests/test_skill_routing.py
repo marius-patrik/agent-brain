@@ -64,6 +64,27 @@ class BundledSkillRoutingTests(unittest.TestCase):
             with self.subTest(skill=name):
                 self.assertIn(f"`{name}`", contract, f"contract never mentions {name}")
 
+    def test_bundled_frontmatter_parses_as_strict_yaml(self) -> None:
+        """A host parser that reads YAML frontmatter must see name and description as strings.
+
+        A colon-space inside an unquoted scalar silently turns the value into a
+        nested mapping, which made DSH drop skill-evolution entirely.
+        """
+        try:
+            import yaml
+        except ImportError:  # pragma: no cover - PyYAML present in CI and locally
+            self.skipTest("PyYAML unavailable")
+        for name in ALLOWLIST:
+            with self.subTest(skill=name):
+                text = (SKILLS / name / "SKILL.md").read_text(encoding="utf-8")
+                match = re.match(r"\A---\n(.*?)\n---\n", text, re.DOTALL)
+                self.assertIsNotNone(match, f"{name}: no frontmatter block")
+                assert match is not None
+                frontmatter = yaml.safe_load(match.group(1))
+                self.assertIsInstance(frontmatter.get("name"), str, name)
+                self.assertIsInstance(frontmatter.get("description"), str, name)
+                self.assertEqual(frontmatter.get("name"), name)
+
     def test_overlapping_repo_local_skills_disambiguate_in_their_descriptions(self) -> None:
         """Near-duplicate pairs must state the boundary in the description itself."""
         pairs = [

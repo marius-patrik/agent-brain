@@ -1,6 +1,6 @@
 ---
 name: skill-evolution
-description: Use when refining, consolidating or retiring an Agent Skill from observed failure or success evidence. Never auto-promote: compare against a baseline and negative triggers before replacing guidance.
+description: Use when refining, consolidating or retiring an Agent Skill from observed failure or success evidence. Never auto-promote without comparing against a baseline and negative triggers before replacing guidance.
 ---
 
 # Skill Evolution
