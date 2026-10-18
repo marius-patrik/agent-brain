@@ -1,6 +1,6 @@
 ---
 name: orient-and-contract
-description: Orient to a repository, issue, or codebase and establish actual state, scope, dependencies, side effects, and acceptance criteria for nontrivial changes.
+description: Use to orient on actual repository and issue state and establish acceptance criteria for nontrivial changes. Skip formal scoping for trivial edits with clear outcomes.
 ---
 
 # Orient And Contract

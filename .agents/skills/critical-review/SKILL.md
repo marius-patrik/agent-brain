@@ -1,6 +1,6 @@
 ---
 name: critical-review
-description: Independently review code, pull requests and designs for correctness, security, regressions and uncovered requirements.
+description: Use to independently inspect code, design or PR changes for correctness, security and regressions. Do not treat author assertions or a review report as proof of passing behavior.
 ---
 
 # Critical Review

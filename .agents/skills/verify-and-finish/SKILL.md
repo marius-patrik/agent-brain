@@ -1,6 +1,6 @@
 ---
 name: verify-and-finish
-description: Verify acceptance criteria, integrations, tests, documentation and actual remote state before claiming work completed.
+description: Use before claiming completed work to verify requirements, affected tests, documentation and remote state. Do not equate green unit tests with a deployed working result.
 ---
 
 # Verify And Finish

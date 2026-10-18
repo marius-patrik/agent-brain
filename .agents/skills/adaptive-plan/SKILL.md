@@ -1,6 +1,6 @@
 ---
 name: adaptive-plan
-description: Plan complex implementation or refactor work as testable, dependency-aware outcomes with a minimal critical path.
+description: Use for multi-step implementations, refactors or migrations that require dependency-aware sequencing and testable milestones. Skip routine single-step edits.
 ---
 
 # Adaptive Plan

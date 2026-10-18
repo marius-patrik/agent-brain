@@ -18,7 +18,7 @@ Do not trigger automatically before every implementation, review or simple bug f
 3. **Pressure-test:** independently seek one failure case or disconfirming fact for each option. Investigate high-impact uncertain claims with authoritative sources or small experiments.
 4. **Compare:** use the same criteria for every candidate: task fit, correctness, implementation and maintenance cost, complexity, security, reversibility, and expected user impact. State unknowns, not fabricated numeric scores.
 5. **Converge:** recommend one option and explain why the others lose. Retain only decision-relevant alternatives and an inexpensive falsification experiment. If evidence cannot distinguish them, state the minimal next investigation.
-6. **Handoff:** obtain any approvals required for consequential changes; pass the chosen design to the existing planner/implementer. Do not keep a parallel ideation process running.
+6. **Handoff:** obtain any approvals required for consequential changes; pass the chosen design to the existing owner of implementation (the packaged implementer role brief when appropriate). Do not keep a parallel ideation process running.
 
 ## Budget and stop rule
 

@@ -1,6 +1,6 @@
 ---
 name: bounded-delegation
-description: Coordinate independent agents or reviewers with explicit ownership, boundaries and evidence-based integration when host delegation is available.
+description: Use when the host supports multiple workers and independently owned tasks benefit from parallelism. Avoid delegation when writing scopes or integration contracts overlap.
 ---
 
 # Bounded Delegation

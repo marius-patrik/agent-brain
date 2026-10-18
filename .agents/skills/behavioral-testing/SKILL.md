@@ -1,6 +1,6 @@
 ---
 name: behavioral-testing
-description: Design and execute externally observable behavioral, regression, edge-case and integration tests without overfitting implementation details.
+description: Use when designing or updating externally observable unit, integration, regression and boundary tests. Do not replace behavioral evidence with syntax or mock-call assertions.
 ---
 
 # Behavioral Testing

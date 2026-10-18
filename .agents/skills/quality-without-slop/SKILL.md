@@ -1,6 +1,6 @@
 ---
 name: quality-without-slop
-description: Use when reviewing or polishing code, product UI, or prose for unnecessary complexity, generic defaults, unsupported claims, and maintainability regressions; apply evidence-based quality criteria before delivery.
+description: Use when reviewing code, UI or writing for avoidable complexity, unfounded decisions and factual inaccuracies. Skip already-satisfactory artifacts and subjective blanket style bans.
 ---
 
 # Quality Without Slop
