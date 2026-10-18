@@ -9,4 +9,4 @@
 
 - [ ] **#17:** Evaluate no-slop and focus candidate skills on real matched agent tasks (including negative triggers) after structural and native-host distribution checks.
 
-- [ ] **#22:** Complete overlap consolidation after routing PR #21; run real task routing, user-facing quality and long-horizon maintenance evaluations for four new candidate capabilities.
+- [ ] **#22:** Reconcile routing PR #21 after removing redundant local skills; run real task routing, user-facing quality and long-horizon maintenance evaluations for four new candidate capabilities.

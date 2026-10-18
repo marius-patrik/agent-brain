@@ -36,5 +36,6 @@ Archive integrity tests prove packaging; plugin discovery checks prove wiring; n
 
 - [x] Add original interface authoring, change resilience, source fidelity and contract-first integration skills without installing new runtimes.
 - [x] Strengthen opt-in action initiation and factual interruption recovery using existing focus owners.
-- [ ] Eliminate redundant repository-local skill procedures after reconciling the independent routing PR (#21), preserving genuinely unique local governance.
+- [x] Retire the three redundant repository-local skill workflows while retaining Git/CI/test/review specifics in native rules and role briefs.
+- [ ] Reconcile PR #21 routing tests with the retired files; preserve strict positive/negative descriptions for the distributed catalog.
 - [ ] Evaluate the expanded catalog on negative routing, realistic multi-step UX/code/evidence tasks and time/token-matched agent trials. Structural checks are not outcome evidence.
