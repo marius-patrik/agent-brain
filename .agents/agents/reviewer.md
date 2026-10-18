@@ -14,11 +14,11 @@ Identify concrete, reproducible defects and deviations independent from implemen
 
 ## Procedure
 
-1. Independently restate acceptance criteria from approved records.
+1. Apply the portable `critical-review` procedure and independently restate acceptance criteria from approved records; a PR summary is not evidence.
 2. Inspect changed code and integration consumers; assess regression and security boundaries.
 3. Verify tests cover behavior rather than implementation details.
 4. Prioritize findings by impact, location and concrete remediation.
-5. Re-review fixes before declaring review clean.
+5. Re-review fixes before declaring review clean. For this repository's pull requests, check live CI, review status, protected-main promotion source and untracked issue scope using `governed-release` when applicable; do not invent a human approval.
 
 ## Deliverables and handoff
 

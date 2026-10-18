@@ -19,7 +19,7 @@ The distributed catalog must cover **authoring** and **assessing** artifacts wit
 
 No new persistent process, personal-health inference, remote agent service, or separate issue/task tracker is part of this architecture. All capabilities use the existing sorted allowlist, native host packaging and distinct positive/negative activation conditions.
 
-Three legacy **repository-only** skills (`repository-orientation`, `implementation-verification`, `independent-review`) overlap portable procedures. Their unique local requirements must be kept by repository rules and role briefs before the redundant skill files are removed; the routing-boundary changes in PR #21 must be reconciled.
+Three redundant **repository-only** skill procedures (`repository-orientation`, `implementation-verification`, `independent-review`) were retired. Their actual local Git/CI/test/review requirements now live in the active repository rules and role briefs. The portable procedures `orient-and-contract`, `behavioral-testing`, `critical-review` and `verify-and-finish` remain the single workflow owners, while `governed-release` owns repository release checks. Skill-routing tests from PR #21 must accept the retired paths, not resurrect parallel instructions.
 
 ## Evaluation and safety
 
