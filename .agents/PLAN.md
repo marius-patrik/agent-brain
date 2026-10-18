@@ -10,8 +10,8 @@
 - [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
 - [x] Verify Codex plugin registration via native local marketplace and DSH skill loading via the native Context + SkillRegistry filesystem provider in CI.
 - [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
-- [ ] Administrator: enable Actions PR creation and verify a bot-authored `development` → `main` PR; first attempt failed (run 38943088413, issue #14).
-- [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
+- [x] Enable GitHub Actions bot PR creation; verify bot-authored `development` → `main` PR #19 and required current-head check dispatch.
+- [x] Verify GitHub native main protection is active with required checks and an independent human approval.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
 - [ ] Verify all CI checks, five published renamed assets, SHA256SUMS, and Git tag after the governed merge to `main`.
 - [x] Reconcile DarkFactory fleet receipt after the repository rename and pin the verified v0.292.3 upstream release.
@@ -37,5 +37,5 @@ Archive integrity tests prove packaging; plugin discovery checks prove wiring; n
 - [x] Add original interface authoring, change resilience, source fidelity and contract-first integration skills without installing new runtimes.
 - [x] Strengthen opt-in action initiation and factual interruption recovery using existing focus owners.
 - [x] Retire the three redundant repository-local skill workflows while retaining Git/CI/test/review specifics in native rules and role briefs.
-- [ ] Reconcile PR #21 routing tests with the retired files; preserve strict positive/negative descriptions for the distributed catalog.
+- [x] Reconcile the routing PR with retired duplicate procedures; preserve positive and negative metadata boundaries across the distributed catalog.
 - [ ] Evaluate the expanded catalog on negative routing, realistic multi-step UX/code/evidence tasks and time/token-matched agent trials. Structural checks are not outcome evidence.

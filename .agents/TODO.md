@@ -2,11 +2,11 @@
 
 - [x] Validate native Claude Code plugin and install the Pi package using CI host CLIs.
 - [x] Verify Codex native marketplace registration and DSH native skill discovery/loading in CI.
-- [ ] **#14:** Enable GitHub Actions PR creation, enforce `main` protection, approve bot-authored promotion, and verify the resulting release.
+- [ ] **#14:** Actions PR creation and native `main` protection are enabled; owner must review and approve bot-authored PR #19, then verify its merged release.
 - [ ] **#9:** Verify pinned DarkFactory v0.292.3 on released `main`, then reconcile the fleet issue.
 - [ ] **#2:** Execute controlled, independently scored agent baseline-versus-bundle tasks on supported hosts and report measured results. Skill changes require positive/negative-trigger and safety regression evidence.
 - [ ] Verify the actual GitHub Projects board title before changing the separate `agent-os` board reference in `repo.dfconfig`.
 
-- [ ] **#17:** Evaluate no-slop and focus candidate skills on real matched agent tasks (including negative triggers) after structural and native-host distribution checks.
+- [ ] Under **#2:** Evaluate no-slop, focus and other candidate skills on real matched agent tasks and negative triggers. Original delivery issue #17 is closed.
 
-- [ ] **#22:** Reconcile routing PR #21 after removing redundant local skills; run real task routing, user-facing quality and long-horizon maintenance evaluations for four new candidate capabilities.
+- [x] Reconcile former PR #21's routing metadata and tests with the removed duplicate local skills; remaining real-model task evaluation belongs to #2.
