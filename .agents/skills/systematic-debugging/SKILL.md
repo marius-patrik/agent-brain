@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: Reproduce and diagnose CI failures, runtime errors, regressions or flaky tests before implementing a cause-directed fix.
+description: Use to reproduce and diagnose CI failures, runtime errors, regressions or flaky tests before writing a fix. Do not patch symptoms without a reproduced, cause-directed failure.
 ---
 
 # Systematic Debugging

@@ -1,6 +1,6 @@
 ---
 name: repository-orientation
-description: Inspect the real repository, consumers and project evidence before proposing changes.
+description: Orient to this repository's own structure (.agents records, roles, CI) before maintaining it. For orienting to an arbitrary external repository or writing an acceptance contract, use orient-and-contract.
 ---
 # Repository Orientation
 

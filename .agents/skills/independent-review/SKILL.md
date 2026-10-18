@@ -1,6 +1,6 @@
 ---
 name: independent-review
-description: Review a proposed change separately from its author and verify issue/PR readiness.
+description: Verify this repository's own PR readiness — acceptance criteria against real code, required native GitHub approvals and untracked scope. For generic code/design review of any change, use critical-review instead.
 ---
 # Independent Review
 

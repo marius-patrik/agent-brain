@@ -1,6 +1,6 @@
 ---
 name: focus-continuity
-description: Use when a coding project spans sessions, interruptions, competing discoveries, or long agent execution; maintain one evidence-backed active objective, park unrelated work, and resume without losing decisions.
+description: Use when a coding project spans sessions, interruptions, competing discoveries, or long agent execution; maintain one evidence-backed active objective, park unrelated work, and resume without losing decisions. Do not use for ordinary single-turn tasks that finish in one context.
 ---
 
 # Focus Continuity

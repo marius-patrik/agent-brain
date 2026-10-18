@@ -1,6 +1,6 @@
 ---
 name: context-handoff
-description: Produce an accurate portable handoff between sessions or workers while preserving verified state and security.
+description: Use when handing work between sessions or workers so the next context can resume without re-deriving state. Do not hand off work that fits in the current context.
 ---
 
 # Context Handoff

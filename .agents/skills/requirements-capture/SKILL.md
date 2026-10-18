@@ -1,6 +1,6 @@
 ---
 name: requirements-capture
-description: Turn owner requirements into durable approved request records and regenerate the PRD.
+description: Turn owner requirements into durable approved request records in .agents/requests and regenerate the PRD. For a short-lived acceptance contract on a single task, use orient-and-contract.
 ---
 # Requirements Capture
 

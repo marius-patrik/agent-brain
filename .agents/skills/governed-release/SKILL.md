@@ -15,7 +15,7 @@ When promoting development into main, publishing tags or auditing release state.
 3. For a main PR, verify the head is this repository's `development` branch.
 4. Require actual native branch protection/reviewer approval before merge; do not call workflow policy equivalent to protection.
 5. After main merge, confirm immutable tag, release URL, source commit and retained integration branch.
-6. If protection is missing, invoke the admin bootstrap procedure using an authorized account, or report that gate as blocked.
+6. If protection is missing, apply it with `python3 .github/scripts/apply_branch_protection.py --apply` using an authorized administrator account, or report that gate as blocked.
 
 ## Evidence of completion
 
