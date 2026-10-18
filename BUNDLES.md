@@ -36,3 +36,7 @@ See [evaluation contract](BENCHMARKS.md).
 The standard distributed catalog includes `quality-without-slop`, `focus-support`, `focus-continuity` and `divergent-ideation`. `focus-support` is user-opt-in: installation is **not** permission to infer ADHD, medical conditions, or apply a compulsory reply style. `focus-continuity` shares the existing plan and handoff sources. `divergent-ideation` respects finite budgets and uses existing host delegation only when available. None installs a runtime or background agent.
 
 Routing and outcome evaluations for these candidate additions remain separate from native installation checks. See [benchmark protocol](BENCHMARKS.md).
+
+### Complementary artifact-building and fidelity skills
+
+`interface-craft` designs actual flows and interaction states; `quality-without-slop` reviews their quality. `change-resilience` protects evolving code across updates, `contract-first-integration` defines cross-component boundaries, and `source-fidelity` checks attribution and evidence rather than merely retrieving sources. These four use the same host-native Agent Skills format, require no added runtime and are candidates pending independently judged outcome testing.

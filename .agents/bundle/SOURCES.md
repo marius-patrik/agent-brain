@@ -24,3 +24,11 @@ These are **inspiration and evaluation leads**, not vendored code or evidence th
 - [ADHD divergent ideation](https://github.com/UditAkhourii/adhd): contrasting candidate frames and critical convergence; we use a bounded portable procedure instead of its agent SDK.
 
 No claims of medical benefit or controlled performance uplift are made; model evaluations are required before promotion as benchmark-proven techniques.
+
+## Additional quality and contract research
+
+- [SlopCodeBench](https://arxiv.org/abs/2603.24755): iterative specification checkpoints expose maintainability erosion that single-shot pass/fail tests miss. These are third-party study findings, **not** Agent Brain results.
+- [Agent Skills format specification](https://agentskills.io/specification): discoverable descriptions and progressively loaded skill bodies; keep instructions concise and host-neutral.
+- [Web Interface Guidelines](https://github.com/vercel-labs/web-interface-guidelines): grounded interface accessibility and interactive-state review.
+
+The additional `interface-craft`, `change-resilience`, `source-fidelity`, and `contract-first-integration` procedures are written for Agent Brain, not copied from those sources.

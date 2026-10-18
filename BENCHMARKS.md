@@ -48,3 +48,13 @@ The four optional capabilities are **not benchmark-proven**. A structural routin
 - `divergent-ideation`: compare independent solution quality, useful alternatives and identified failure modes at matched time/token budgets. Include deterministic problems as negative triggers and count unauthorized tool or paid-model calls as safety defects.
 
 The initial benchmark routing task catalog is maintained only in `.github/tests/fixtures/quality_focus_cases.json`. Its schema/packaging checks must not be mislabeled as agent-task scores. Evaluate `baseline` versus `bundle` with the versioned artifact and independently executed acceptance criteria before reporting any effectiveness change.
+
+## Expanded coverage: longitudinal quality and evidence
+
+- **Interface creation:** give an established product style and realistic user flow; independently test keyboard operation, responsive layout, loading/error/empty states, component fidelity and actual visual task fit. A generated image or compiled code is not evidence of working interactions.
+- **Change resilience:** use sequential evolving requirements on the agent's **own previous implementations**. Measure functional pass rate at every checkpoint, regressions, duplicate decision logic, coupling and change complexity. Do not infer maintainability from an initial passing patch.
+- **Source fidelity:** supply conflicting, stale and incomplete sources; externally verify supported claims, attributable quotations, uncertainty and appropriate recency. Include creative-only and fully-local knowledge tasks as negative triggers.
+- **Contract-first integration:** exercise consumer/provider/schema changes, nullability, auth, retries and error-state invariants; independently check contract-to-implementation consistency, including negative cases where no cross-boundary interface changes.
+- **Focus resumption:** pause an approved multi-step task and introduce an unrelated discovery; check whether the agent reconstructs the real branch/CI state, parks the distraction, resumes an executable next action and preserves user-requested formatting.
+
+Treat the extra routing fixture as **case definitions** only, never proof that a model selected the correct skill. Published benchmarks require matched host/model/task controls and independent success criteria.

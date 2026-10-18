@@ -19,6 +19,8 @@ This is **interaction presentation**, not a special agent runtime, scheduling to
 4. Keep technical precision and safety qualifications. Offer or provide depth when asked; do not cap answer length mechanically.
 5. When a task depends on the user, specify what action they must take and what it unlocks. Avoid invented deadlines, time estimates, reminders, or promises of background progress.
 6. Reduce unsolicited options, motivational filler, rhetorical repetition and surprise context switches. Preserve user choice and autonomy.
+7. For an explicit request to help **start** a task, surface the first immediately executable step and what completion of that step looks like. Do not arbitrarily split an already clear task or hand the work back when the agent can do it.
+8. When several decisions require user input, name the blocking decision first and park unrelated optional questions. Present the full decision context when genuinely needed.
 
 ## Interaction decisions
 

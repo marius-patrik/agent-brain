@@ -31,3 +31,10 @@ Archive integrity tests prove packaging; plugin discovery checks prove wiring; n
 - [ ] Validate candidate skill routing using positive and negative examples and host-level evaluation; distinguish fixture/packaging tests from actual agent behavior.
 - [ ] Run paired task-quality comparisons, including code-change complexity, UI usability, source fidelity, goal resumption accuracy, user-requested reply usability and cost-matched ideation.
 - [ ] Promote the reviewed candidate changes through the repository's release gate. No behavioral uplift is claimed until independently measured.
+
+## Extended quality, evidence and focus — #22
+
+- [x] Add original interface authoring, change resilience, source fidelity and contract-first integration skills without installing new runtimes.
+- [x] Strengthen opt-in action initiation and factual interruption recovery using existing focus owners.
+- [ ] Eliminate redundant repository-local skill procedures after reconciling the independent routing PR (#21), preserving genuinely unique local governance.
+- [ ] Evaluate the expanded catalog on negative routing, realistic multi-step UX/code/evidence tasks and time/token-matched agent trials. Structural checks are not outcome evidence.
