@@ -234,6 +234,222 @@
         "divergent-ideation"
       ],
       "criterion": "Do not spawn extra agents or inflate decision costs."
+    },
+    {
+      "id": "ui-build-1",
+      "request": "Build a complete checkout interface consistent with our existing UI design tokens, including error, empty and loading states.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "quality-without-slop",
+        "source-fidelity"
+      ],
+      "criterion": "Implement coherent task-focused flows and exercise actual interactions, not just draw a mockup."
+    },
+    {
+      "id": "ui-build-2",
+      "request": "Implement the new responsive file-explorer screen, with keyboard navigation and accessible collapsed sidebar behavior.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Use existing components and verify collapsed, resized and keyboard-accessible states."
+    },
+    {
+      "id": "ui-build-3",
+      "request": "Design a novel scheduling interface from three real product references, then implement it with the established component library.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Select a justified visual direction tied to the user task and verify actual interactions."
+    },
+    {
+      "id": "ui-neg-1",
+      "request": "Review an already implemented dashboard for generic visual design and inaccessible keyboard flow; do not redesign it yet.",
+      "route": [
+        "quality-without-slop"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Report objective usability defects as an audit without unsolicited rebuilding."
+    },
+    {
+      "id": "ui-neg-2",
+      "request": "Change the misspelled string on an approved button without altering the design.",
+      "route": [],
+      "exclude": [
+        "interface-craft",
+        "change-resilience"
+      ],
+      "criterion": "Perform only the requested localized correction and avoid exploratory redesign."
+    },
+    {
+      "id": "resilience-1",
+      "request": "Extend last week's parser with another format and make sure all the earlier extensions still work without duplication.",
+      "route": [
+        "change-resilience",
+        "behavioral-testing"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Preserve all earlier functional checkpoints and minimize duplication and coupling across extensions."
+    },
+    {
+      "id": "resilience-2",
+      "request": "Refactor a state machine after five incremental features added scattered branches; keep each existing state transition correct.",
+      "route": [
+        "change-resilience"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Trace invariants and provide before/after structural and functional evidence."
+    },
+    {
+      "id": "resilience-3",
+      "request": "The same authorization rule is now duplicated in three modules after successive iterations. Correct the owner before extending again.",
+      "route": [
+        "change-resilience"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Unify actual policy ownership without unnecessary compatibility paths or behavioral regressions."
+    },
+    {
+      "id": "resilience-neg-1",
+      "request": "Explain what the word interface means, without changing code.",
+      "route": [],
+      "exclude": [
+        "change-resilience",
+        "contract-first-integration"
+      ],
+      "criterion": "Answer the factual question without starting a maintenance audit."
+    },
+    {
+      "id": "resilience-neg-2",
+      "request": "Fix one isolated typo in a comment, with no runtime or interface impact.",
+      "route": [],
+      "exclude": [
+        "change-resilience"
+      ],
+      "criterion": "Make the minimal one-line edit without proactive architectural refactoring."
+    },
+    {
+      "id": "fidelity-1",
+      "request": "Summarize two source papers with conflicting reported dataset sizes and explain which revision each number describes.",
+      "route": [
+        "source-fidelity"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Attribute figures to the correct source revision and explain conflicting evidence."
+    },
+    {
+      "id": "fidelity-2",
+      "request": "Verify the current documented API behavior against versioned official docs rather than relying on an older blog post.",
+      "route": [
+        "source-fidelity",
+        "context-and-tools"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Validate time-sensitive claims against the actual authoritative versioned source."
+    },
+    {
+      "id": "fidelity-3",
+      "request": "Proofread this grant claim against the cited report; flag any unsupported quotations and exaggerated success claims.",
+      "route": [
+        "source-fidelity"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Trace quoted material and conclusions to source evidence without inventing support."
+    },
+    {
+      "id": "fidelity-neg-1",
+      "request": "Write an imaginative short story in a fictional universe with no factual citations.",
+      "route": [],
+      "exclude": [
+        "source-fidelity",
+        "contract-first-integration"
+      ],
+      "criterion": "Write creatively rather than launching an external evidence verification workflow."
+    },
+    {
+      "id": "fidelity-neg-2",
+      "request": "Tell me what the already attached local text says in its first sentence, with no current external research requested.",
+      "route": [],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Answer directly from the supplied text without speculative broader sourcing."
+    },
+    {
+      "id": "contract-1",
+      "request": "Design the request and response schemas for a new authenticated multi-package API before building its server and UI clients.",
+      "route": [
+        "contract-first-integration"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "State normative schema source, auth boundaries, types, errors and consumer tests before code."
+    },
+    {
+      "id": "contract-2",
+      "request": "Migrate a database field to nullable across the storage schema, API serializer and client form without contradictions.",
+      "route": [
+        "contract-first-integration",
+        "behavioral-testing"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Cross-check actual schema, runtime validation, data migration and every dependent consumer."
+    },
+    {
+      "id": "contract-3",
+      "request": "Review an async payment workflow contract: retries, idempotency, state machine and failure cases across independently owned services.",
+      "route": [
+        "contract-first-integration"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Reconcile idempotency and failure-state invariants at real provider/consumer boundaries."
+    },
+    {
+      "id": "contract-neg-1",
+      "request": "Rename an internal loop index without changing the function signature or data contract.",
+      "route": [],
+      "exclude": [
+        "contract-first-integration",
+        "divergent-ideation"
+      ],
+      "criterion": "Avoid drafting unnecessary schemas for a purely local correction."
+    },
+    {
+      "id": "contract-neg-2",
+      "request": "Improve the typography of a static page without changing APIs or persisted state.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "contract-first-integration"
+      ],
+      "criterion": "Keep the change at the interface surface; do not invent backend contracts."
     }
   ]
 }

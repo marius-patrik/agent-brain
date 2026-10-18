@@ -8,3 +8,5 @@
 - [ ] Verify the actual GitHub Projects board title before changing the separate `agent-os` board reference in `repo.dfconfig`.
 
 - [ ] **#17:** Evaluate no-slop and focus candidate skills on real matched agent tasks (including negative triggers) after structural and native-host distribution checks.
+
+- [ ] **#22:** Complete overlap consolidation after routing PR #21; run real task routing, user-facing quality and long-horizon maintenance evaluations for four new candidate capabilities.

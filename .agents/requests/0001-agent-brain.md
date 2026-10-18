@@ -36,3 +36,12 @@ Provide a lightweight, custom-owned collection of Agent Skills, behavioral guida
 - Provide `divergent-ideation` only for meaningful open choices, with independent alternatives, failure-case critique, bounded options, authorization-aware compute costs and a convergent recommendation.
 - Use host-native capabilities, not a new agent runtime. Keep all four in the single distributed allowlist and package them identically for five hosts.
 - Publish evaluation-ready positive and negative routing cases, independent quality outcomes and cost/safety measures. A skill may ship as a **candidate** before it earns evidence for performance claims.
+
+## Complete artifact-quality coverage
+
+- Distinguish **building** a coherent accessible interface (`interface-craft`) from reviewing an existing interface (`quality-without-slop`); avoid stereotyped default UI without banning specific styles.
+- Protect extension maintainability over repeated changes (`change-resilience`): preserve contracts and invariants, compare structural changes between checkpoints, and require prior behaviors to survive.
+- Verify claim-to-source fidelity (`source-fidelity`) during technical research, quotations, claims about current behavior and comparisons. Source retrieval is separate from evidence verification.
+- Establish authoritative API, schema and state-transition contracts before coordinated implementation (`contract-first-integration`), avoiding aspirational pseudo-contracts passed off as current runtime truth.
+- Make ADHD-friendly communication **optional** and action-oriented, including concrete task initiation and low-friction resumption, without diagnosis assumptions or a new task manager.
+- Evaluate each skill against meaningful positive and negative activation cases and independently observable outcomes. Prevent duplicate internal maintenance skills from competing with their portable equivalents.

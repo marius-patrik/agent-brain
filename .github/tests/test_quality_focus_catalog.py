@@ -25,6 +25,10 @@ CANDIDATES = {
     "focus-support",
     "focus-continuity",
     "divergent-ideation",
+    "interface-craft",
+    "change-resilience",
+    "source-fidelity",
+    "contract-first-integration",
 }
 
 
