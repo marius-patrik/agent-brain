@@ -1,6 +1,6 @@
 ---
 name: skill-evolution
-description: Create, refine, consolidate or retire Agent Skills using reproducible observed patterns and controlled evaluations; do not auto-promote.
+description: Use when improving, consolidating or retiring Agent Skills based on observed task evidence. Never claim uplift or promote revisions without baseline, negative-trigger and safety evaluations.
 ---
 
 # Skill Evolution

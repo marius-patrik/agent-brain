@@ -1,6 +1,6 @@
 ---
 name: context-handoff
-description: Produce an accurate portable handoff between sessions or workers while preserving verified state and security.
+description: Use when passing verified task state between sessions or workers to enable reliable resumption. Skip unnecessary handoffs when the task ends in the current context.
 ---
 
 # Context Handoff
