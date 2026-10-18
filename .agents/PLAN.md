@@ -10,8 +10,8 @@
 - [x] Validate Claude plugin with native CLI and install Pi package with its native CLI in PR CI.
 - [x] Verify Codex plugin registration via native local marketplace and DSH skill loading via the native Context + SkillRegistry filesystem provider in CI.
 - [ ] Strengthen reproducible scenario-based benchmarking and independently validate candidate skill revisions.
-- [ ] Administrator: enable Actions PR creation and verify a bot-authored `development` → `main` PR; first attempt failed (run 38943088413, issue #14).
-- [ ] Verify and apply GitHub main protection using an authenticated administrator with ruleset permissions.
+- [x] Enable Actions PR creation (`can_approve_pull_request_reviews`) and verify bot-authored `development` → `main` PR #19; run 39105005115 succeeded.
+- [x] Verify and apply GitHub main protection with an authenticated administrator; live `main.protected = true` with the declared checks, reviews and restrictions.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
 - [ ] Verify all CI checks, five published renamed assets, SHA256SUMS, and Git tag after the governed merge to `main`.
 - [x] Reconcile DarkFactory fleet receipt after the repository rename and pin the verified v0.292.3 upstream release.

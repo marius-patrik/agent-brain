@@ -3,7 +3,7 @@ status: published
 ---
 # Develop, validate and release
 
-Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development` and should be created by the GitHub Actions bot to permit independent owner review; the promotion workflow requires an administrator to enable GitHub Actions pull-request creation. This setting is not enabled in the observed repository; an unsuccessful bot PR run is not a published release. Until the setting and native `main` protection are verified, leave release promotion pending rather than using an administrative bypass. Preserve review and CI gates.
+Changes begin on a dedicated branch against `development`. Update approved requirements and accepted decisions with a meaningful scope change, edit canonical skill sources, then regenerate projections. PRs to `main` must originate from `development` and are created by the GitHub Actions bot to permit independent owner review; the repository setting that permits bot-authored pull requests is enabled, and the promotion workflow never auto-approves or auto-merges. Native `main` protection is applied and verified through live GitHub settings. A promotion PR still requires the owner's approving review before it can merge; leave release promotion pending rather than using an administrative bypass. Preserve review and CI gates.
 
 ```bash
 python3 .github/scripts/generate_documents.py --write
