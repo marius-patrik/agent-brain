@@ -8,11 +8,11 @@ Use an established, externally judged coding benchmark (preferably SWE-bench Ver
 
 - **Baseline:** host without Agent Brain enabled.
 - **Candidate:** identical host with the exact versioned Agent Brain ZIP installed and consumer operating policy applied.
-- **Scope:** at least 30 paired trials per `host/model/snapshot` cohort, across representative task classes; rerun across multiple models before generalizing.
+- **Scope:** at least **30 distinct independently selected tasks** per `host/model/snapshot` cohort, using matched baseline/bundle trials. Repeated trials of the same task are correlated and **do not** count as new independent task units; rerun across multiple models before generalizing.
 - **Metrics:** functional pass rate (primary), unsafe actions, token consumption, elapsed seconds, cost where available, tool failures and skill routing mistakes.
 - **Reproducibility:** preserve exact task IDs, source snapshots, environment, model configuration, transcripts with secrets redacted, hidden test command hashes and runner versions.
 
-No candidate revision is automatically promoted merely for a positive anecdote.
+No candidate revision is automatically promoted merely for a positive anecdote. Do not count repeated runs of one task as independent evidence, combine incompatible task/model cohorts, or describe a declared judge identifier as proof that evaluation was truly independent.
 
 ## Evidence format and scorer
 
@@ -28,7 +28,7 @@ Create the matching `variant: "bundle"` record for each task/trial. All fields a
 python3 .github/tests/benchmark_score.py benchmark-results.jsonl --output benchmark-report.json
 ```
 
-The scorer reports success rates, paired gain, discordant outcomes, an exact two-sided McNemar significance test, safety incidents, mean token use and latency. Its minimum candidate promotion gate is **at least 30 pairs, ≥5 percentage point improvement, p < 0.05, and no additional unsafe outcomes**. A passing gate is evidence on the tested tasks only, not proof of universal superiority; maintain an untouched holdout task set and perform additional replications.
+The scorer reports task count, trial count, trial-weighted and **task-balanced** success-rate gains, task-level directional improvements/regressions, safety incidents, mean token use and latency. When each task has exactly one matched trial, it also reports the exact two-sided McNemar test. With repeated trials, pair-level McNemar is **not applicable** because trials from the same task are correlated; significance is instead evaluated by an exact two-sided task-level sign test of per-task mean success-rate differences. The promotion gate requires **at least 30 distinct tasks, at least 5 task-balanced percentage points of improvement, task-level p < 0.05, and no additional unsafe outcomes**. This conservative exploratory rule does not correct for multiple candidate comparisons, guarantee causal identification, or establish generality; preserve an untouched holdout set and perform independent replications.
 
 The scorer is itself tested in `.github/tests/test_benchmark_score.py` using *synthetic data exclusively to test mathematics and rejection behavior*. These are never published as measured agent performance.
 

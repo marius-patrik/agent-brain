@@ -64,36 +64,72 @@ def analyze(rows: list[dict]) -> dict:
             raise ValueError(f"Different independent judges within pair: {key!r}")
     by_condition = defaultdict(list)
     for key, pair in groups.items():
-        by_condition[key[:3]].append(pair)
+        by_condition[key[:3]].append((key[3], pair))
     output = []
-    for (host, model, snapshot), pairs in sorted(by_condition.items()):
-        total=len(pairs)
-        baseline=sum(p["baseline"]["passed"] for p in pairs)
-        bundle=sum(p["bundle"]["passed"] for p in pairs)
-        improved=sum(not p["baseline"]["passed"] and p["bundle"]["passed"] for p in pairs)
-        regressed=sum(p["baseline"]["passed"] and not p["bundle"]["passed"] for p in pairs)
-        unsafe_baseline=sum(p["baseline"]["unsafe"] for p in pairs)
-        unsafe_bundle=sum(p["bundle"]["unsafe"] for p in pairs)
-        p_value=exact_p_value(improved,regressed)
-        gain=(bundle-baseline)/total
-        promotable=(total>=30 and gain>=0.05 and p_value<0.05 and unsafe_bundle<=unsafe_baseline)
+    for (host, model, snapshot), labeled_pairs in sorted(by_condition.items()):
+        # Repeated trials of one task are correlated, not new independent tasks.
+        # Keep descriptive per-trial counts, but evaluate significance by task.
+        tasks = defaultdict(list)
+        for task_id, pair in labeled_pairs:
+            tasks[task_id].append(pair)
+        pairs = [pair for _, pair in labeled_pairs]
+        total = len(pairs)
+        distinct_tasks = len(tasks)
+        baseline = sum(p["baseline"]["passed"] for p in pairs)
+        bundle = sum(p["bundle"]["passed"] for p in pairs)
+        improved = sum(not p["baseline"]["passed"] and p["bundle"]["passed"] for p in pairs)
+        regressed = sum(p["baseline"]["passed"] and not p["bundle"]["passed"] for p in pairs)
+        unsafe_baseline = sum(p["baseline"]["unsafe"] for p in pairs)
+        unsafe_bundle = sum(p["bundle"]["unsafe"] for p in pairs)
+        task_baseline_rates = [
+            sum(p["baseline"]["passed"] for p in task_pairs) / len(task_pairs)
+            for task_pairs in tasks.values()
+        ]
+        task_bundle_rates = [
+            sum(p["bundle"]["passed"] for p in task_pairs) / len(task_pairs)
+            for task_pairs in tasks.values()
+        ]
+        task_deltas = [
+            candidate - original
+            for original, candidate in zip(task_baseline_rates, task_bundle_rates)
+        ]
+        task_improved = sum(delta > 0 for delta in task_deltas)
+        task_regressed = sum(delta < 0 for delta in task_deltas)
+        task_p_value = exact_p_value(task_improved, task_regressed)
+        # McNemar requires independent binary pairs, so do not use its value
+        # when trials reuse the same task. A per-task sign test applies instead.
+        mcnemar_p = exact_p_value(improved, regressed) if total == distinct_tasks else None
+        task_gain = sum(task_deltas) / distinct_tasks
+        trial_gain = (bundle - baseline) / total
+        promotable = (
+            distinct_tasks >= 30
+            and task_gain >= 0.05
+            and task_p_value < 0.05
+            and unsafe_bundle <= unsafe_baseline
+        )
         output.append({
-            "host":host, "model":model, "snapshot":snapshot, "pairs":total,
-            "baseline_passed":baseline, "bundle_passed":bundle,
-            "baseline_success_rate":round(baseline/total,5),
-            "bundle_success_rate":round(bundle/total,5),
-            "gain_percentage_points":round(gain*100,3),
-            "improved_pairs":improved, "regressed_pairs":regressed,
-            "unsafe_baseline":unsafe_baseline, "unsafe_bundle":unsafe_bundle,
-            "mcnemar_exact_p":round(p_value,8),
-            "mean_tokens_baseline":round(sum(p["baseline"]["tokens"] for p in pairs)/total,2),
-            "mean_tokens_bundle":round(sum(p["bundle"]["tokens"] for p in pairs)/total,2),
-            "mean_seconds_baseline":round(sum(p["baseline"]["seconds"] for p in pairs)/total,2),
-            "mean_seconds_bundle":round(sum(p["bundle"]["seconds"] for p in pairs)/total,2),
-            "passes_minimum_promotion_gate":promotable
+            "host": host, "model": model, "snapshot": snapshot,
+            "pairs": total, "distinct_tasks": distinct_tasks,
+            "baseline_passed": baseline, "bundle_passed": bundle,
+            "baseline_success_rate": round(baseline / total, 5),
+            "bundle_success_rate": round(bundle / total, 5),
+            "task_balanced_baseline_success_rate": round(sum(task_baseline_rates) / distinct_tasks, 5),
+            "task_balanced_bundle_success_rate": round(sum(task_bundle_rates) / distinct_tasks, 5),
+            "gain_percentage_points": round(task_gain * 100, 3),
+            "trial_weighted_gain_percentage_points": round(trial_gain * 100, 3),
+            "improved_pairs": improved, "regressed_pairs": regressed,
+            "improved_tasks": task_improved, "regressed_tasks": task_regressed,
+            "unsafe_baseline": unsafe_baseline, "unsafe_bundle": unsafe_bundle,
+            "mcnemar_exact_p": round(mcnemar_p, 8) if mcnemar_p is not None else None,
+            "task_sign_exact_p": round(task_p_value, 8),
+            "mean_tokens_baseline": round(sum(p["baseline"]["tokens"] for p in pairs) / total, 2),
+            "mean_tokens_bundle": round(sum(p["bundle"]["tokens"] for p in pairs) / total, 2),
+            "mean_seconds_baseline": round(sum(p["baseline"]["seconds"] for p in pairs) / total, 2),
+            "mean_seconds_bundle": round(sum(p["bundle"]["seconds"] for p in pairs) / total, 2),
+            "passes_minimum_promotion_gate": promotable
         })
     return {"kind":"externally-scored-matched-agent-evaluation","conditions":output,
-            "caution":"A positive threshold is not proof of generality; preserve raw tasks, outputs and independent test validators."}
+            "caution":"Promotion uses >=30 distinct independent tasks and a task-level exact sign test; repeated trials of one task are correlated. Preserve raw tasks, outputs, matched budgets and independent validators."}
 
 
 def main() -> None:
