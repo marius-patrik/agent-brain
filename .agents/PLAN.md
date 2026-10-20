@@ -14,8 +14,8 @@
 - [x] Verify GitHub native main protection is active with required checks and an independent human approval.
 - [ ] Run scored real model baseline-versus-bundle experiments for all supported hosts, reporting budgets and variance.
 - [ ] Verify all CI checks, five published renamed assets, SHA256SUMS, and Git tag after the governed merge to `main`.
-- [x] Reconcile DarkFactory fleet receipt after the repository rename and pin the verified v0.292.3 upstream release.
-- [ ] Confirm DarkFactory v0.292.3 operates on the merged main branch and settle superseded fleet issues.
+- [x] Reconcile DarkFactory fleet receipt after the repository rename and pin the published v0.292.4 upstream release and verified artifact digest.
+- [ ] Confirm DarkFactory v0.292.4 operates on the merged main branch and settle superseded fleet issues.
 
 ## Release discipline
 
