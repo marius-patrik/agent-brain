@@ -15,7 +15,7 @@ Own decomposition, task assignment, dependency order and final evidence collecti
 
 ## Procedure
 
-1. Inspect the repository and identify the implementation owner of every change.
+1. Use the shared `orient-and-contract` skill to inspect Git state, current refs, `.agents/GOAL.md`, generated PRD/ARCHITECTURE/AGENTS and actual CI/consumers before work. Identify the implementation owner of every change.
 2. Decompose only genuinely independent tasks with explicit file ownership, acceptance criteria and dependencies.
 3. Delegate only when a real agent/runtime is available; otherwise execute sequentially or report a limitation.
 4. Integrate verified results, resolve cross-lane conflicts and run full affected-scope checks.

@@ -10,4 +10,4 @@ python3 .github/scripts/apply_branch_protection.py
 python3 .github/scripts/apply_branch_protection.py --apply
 ```
 
-Require appropriate reviews and green checks; the repository's main-source workflow additionally enforces that release PRs come only from `development`. If GitHub reports `main.protected = false`, protection remains an administrative blocker, not a completed task.
+The **Settings → Actions → General → Workflow permissions → Allow GitHub Actions to create and approve pull requests** setting is enabled. Native `main` branch protection has been independently observed as active, with required `main-source`/`generated-docs` checks, one approving review, required conversation resolution, strict up-to-date checks and no force-push or deletion. The [bot-authored promotion PR #19](https://github.com/marius-patrik/agent-brain/pull/19) exists; the release remains pending until the required owner review, protected merge and resulting release-asset verification. See [issue #14](https://github.com/marius-patrik/agent-brain/issues/14).

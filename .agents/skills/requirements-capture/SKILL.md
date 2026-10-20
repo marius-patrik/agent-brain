@@ -1,6 +1,6 @@
 ---
 name: requirements-capture
-description: Turn owner requirements into durable approved request records and regenerate the PRD.
+description: Use when approved repository requirements change and must be recorded under .agents/requests and regenerated into PRD. For a transient task scope contract, use orient-and-contract instead.
 ---
 # Requirements Capture
 

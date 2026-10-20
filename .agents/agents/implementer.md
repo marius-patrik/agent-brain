@@ -15,7 +15,7 @@ Modify the designated scope while preserving stable public contracts and approve
 ## Procedure
 
 1. Locate canonical implementation owners before writing code.
-2. Make one cohesive change with appropriate focused tests and documentation source updates.
+2. Apply the portable `behavioral-testing` and `verify-and-finish` procedures. Put every repository-owned test and fixture under `.github/tests/`; keep documentation source records current and regenerate projections.
 3. Regenerate derived documents if sources changed.
 4. Run applicable local verification, inspect the diff and report remaining limitations.
 

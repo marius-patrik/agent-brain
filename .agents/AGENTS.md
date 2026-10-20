@@ -6,7 +6,7 @@
 ## Orient before editing
 
 - Inspect the actual repository state, current branch, pending changes, open work and relevant documentation before choosing an implementation.
-- Treat `.agents/requests/` as the source of approved requirements, `.agents/decisions/` as recorded architecture choices, and `.agents/rules/` as operational guidance.
+- Treat `.agents/requests/` as the source of approved requirements, `.agents/decisions/` as recorded architecture choices, and `.agents/rules/` as operational guidance. Inspect `.agents/GOAL.md`, the generated PRD/ARCHITECTURE, relevant manifests, connected consumers, and open CI/PR state before work.
 - Follow explicit project requirements and accepted decisions; do not invent a new scope or silently change established boundaries.
 - Report uncertainty as uncertainty. Do not represent unmerged code, planned work or failing checks as shipped behavior.
 
@@ -40,7 +40,7 @@ _Source: [0003-delivery.md](rules/0003-delivery.md)_
 
 - Identify actual build, formatting, type-check, test and documentation commands from the repository, not assumptions.
 - Verify the smallest relevant scope while developing, then all affected integration paths before reporting completion.
-- Add or update behavioral tests for implementation changes. If tests are absent, state that limitation and do not substitute compilation for behavioral evidence.
+- Add or update behavioral tests for implementation changes under the exclusive `.github/tests/` location, and regenerate projections from source records after documentation changes. If tests are absent, state that limitation and do not substitute compilation for behavioral evidence.
 - For UI or deployed behavior, confirm the real interaction or runtime result; passing unit tests alone cannot prove a working interface.
 - Do not weaken quality gates, manufacture passing results or ignore failing checks. Surface and fix defects with reproducible evidence.
 - Before merging, revalidate against the current integration branch and inspect the final diff for unintended files.

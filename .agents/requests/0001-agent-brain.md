@@ -1,0 +1,47 @@
+---
+status: approved
+---
+# Product requirements: Agent Brain
+
+## Goal
+
+Provide a lightweight, custom-owned collection of Agent Skills, behavioral guidance, and optional role briefs that improves the practice of existing coding agents without modifying or implementing their runtimes.
+
+## Deliverables
+
+- Ship one authoritative, reviewable `AGENTS.md` operating policy under `.agents/bundle/` and original, narrowly scoped Agent Skills under `.agents/skills/`.
+- Explicitly select bundled skills with `.agents/bundle/bundle.json`; never distribute every repository-local skill by accident.
+- Compile reproducible, checksum-verified, installable ZIPs for Claude Code, Codex, Pi, DSH and generic Open Agents-compliant project consumers.
+- Include host-specific entrypoints, install procedures, roles as references, licensing, source provenance and versioned bundle manifests.
+- Avoid bundled secrets, arbitrary executable code, vendors' agent runtimes and implicit remote installation.
+- Validate actual archive files and installation layout; preserve deterministic output for a given commit/tag.
+- Define and execute controlled benchmark comparisons of host without and with the bundle, using matched snapshots, permissions, models, budgets and independently judged task results before claiming behavioral improvement.
+- Evolve skills by recording failure evidence, comparing candidates against prior behavior and gating promotion on meaningful improvements without material regressions.
+
+## Packaging and source governance
+
+- Root `.agents/` and `.github/` remain native directories. Root `README.md` and `CONTRIBUTING.md` are Git symlinks to generated source projections.
+- `.agents/{notes,requests,decisions,rules}` own README, PRD, ARCHITECTURE and contributor rules; the generator writes committed deterministic projections.
+- `.github/tests/` exclusively owns tests, fixtures and benchmark harness code. Public evidence is never invented.
+- Native GitHub Actions workflows live in `.github/workflows/`. `development` integrates feature PRs; only its branch may target `main`.
+- Default versioning is immutable SemVer tags derived on `main` from existing release tags, not a compulsory `VERSION` file; an explicit opt-in file mode may remain supported.
+- Preserve actual GitHub protection and human review gates; do not treat a configuration declaration as enforcement.
+- Keep the pinned DarkFactory submodule separate from distributed product assets and do not ship its runtime.
+
+## Evidence-gated quality and focus
+
+- Ship one custom-owned `quality-without-slop` review procedure covering code maintainability, actual UI usability/design fit, and factual writing fidelity, without blanket bans or speculative cleanup.
+- Provide an **optional**, explicitly requested `focus-support` presentation capability that preserves full technical accuracy and never infers ADHD or other diagnoses.
+- Provide `focus-continuity` for multi-session work, interruption recovery, backlog parking and verified progress, composing with existing `adaptive-plan` and `context-handoff` rather than duplicating state.
+- Provide `divergent-ideation` only for meaningful open choices, with independent alternatives, failure-case critique, bounded options, authorization-aware compute costs and a convergent recommendation.
+- Use host-native capabilities, not a new agent runtime. Keep all four in the single distributed allowlist and package them identically for five hosts.
+- Publish evaluation-ready positive and negative routing cases, independent quality outcomes and cost/safety measures. A skill may ship as a **candidate** before it earns evidence for performance claims.
+
+## Complete artifact-quality coverage
+
+- Distinguish **building** a coherent accessible interface (`interface-craft`) from reviewing an existing interface (`quality-without-slop`); avoid stereotyped default UI without banning specific styles.
+- Protect extension maintainability over repeated changes (`change-resilience`): preserve contracts and invariants, compare structural changes between checkpoints, and require prior behaviors to survive.
+- Verify claim-to-source fidelity (`source-fidelity`) during technical research, quotations, claims about current behavior and comparisons. Source retrieval is separate from evidence verification.
+- Establish authoritative API, schema and state-transition contracts before coordinated implementation (`contract-first-integration`), avoiding aspirational pseudo-contracts passed off as current runtime truth.
+- Make ADHD-friendly communication **optional** and action-oriented, including concrete task initiation and low-friction resumption, without diagnosis assumptions or a new task manager.
+- Evaluate each skill against meaningful positive and negative activation cases and independently observable outcomes. Prevent duplicate internal maintenance skills from competing with their portable equivalents.

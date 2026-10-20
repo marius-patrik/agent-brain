@@ -18,4 +18,4 @@ status: published
 | `repo.dfconfig` | DarkFactory integration and GitHub policy declaration |
 | `.darkfactory` | Pinned DarkFactory development-tooling submodule, not distributed |
 
-Root README and CONTRIBUTING are symlinks to generated documents; generated Markdown is not a second editable source. Agent OS distributions never package DarkFactory or the repository's own generated project rules.
+Root README and CONTRIBUTING are symlinks to generated documents; generated Markdown is not a second editable source. Agent Brain distributions never package DarkFactory or the repository's own generated project rules.

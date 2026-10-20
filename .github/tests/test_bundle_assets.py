@@ -29,7 +29,7 @@ class BundleAssetsTests(unittest.TestCase):
                     meta = json.loads(z.read("BUNDLE-MANIFEST.json"))
                     self.assertEqual(meta["version"], "3.2.1")
                     self.assertEqual(meta["evidence"], "not-benchmarked")
-                    self.assertEqual(len(meta["skills"]), 11)
+                    self.assertEqual(meta["skills"], json.loads((ROOT / ".agents/bundle/bundle.json").read_text(encoding="utf-8"))["skills"])
             self.assertEqual((Path(one) / "SHA256SUMS").read_bytes(),
                              (Path(two) / "SHA256SUMS").read_bytes())
 
@@ -59,6 +59,24 @@ class BundleAssetsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaises(ValueError):
                 build.build("../malicious", Path(directory))
+
+    def test_symlinked_role_is_never_packaged(self):
+        with tempfile.TemporaryDirectory() as directory:
+            staging = Path(directory) / "source"
+            staging.mkdir()
+            for filename in ("bundle.json", "AGENTS.md", "SOURCES.md"):
+                (staging / filename).write_bytes((build.SOURCE / filename).read_bytes())
+            (staging / "roles").mkdir()
+            secret = Path(directory) / "secret.md"
+            secret.write_text("this content must not enter an archive", encoding="utf-8")
+            (staging / "roles" / "reviewer.md").symlink_to(secret)
+            original = build.SOURCE
+            try:
+                build.SOURCE = staging
+                with self.assertRaisesRegex(ValueError, "Unsafe role reference"):
+                    build.canonical()
+            finally:
+                build.SOURCE = original
 
 
 if __name__ == "__main__":

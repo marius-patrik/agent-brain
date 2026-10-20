@@ -77,3 +77,16 @@ jobs:
             fi
           done
           gh release view "$RELEASE_TAG" --json tagName,url
+      - name: Independently verify published tag and downloaded release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-list -n 1 "$RELEASE_TAG")" = "$GITHUB_SHA"
+          published_dir="$(mktemp -d)"
+          trap 'rm -rf "$published_dir"' EXIT
+          gh release download "$RELEASE_TAG" --dir "$published_dir"
+          python3 .github/scripts/verify_published_release.py \
+            --tag "$RELEASE_TAG" --local-dir dist --published-dir "$published_dir"

@@ -5,7 +5,7 @@ status: accepted
 
 ## Decision
 
-`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
+`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. The release-promotion workflow attempts to create a GitHub Actions bot-authored PR, allowing an independent human owner review. It **cannot operate** until the repository administrator enables GitHub Actions to create pull requests; a user-authored promotion cannot satisfy its own independent approval. When enabled, the workflow dispatches checks on the `development` head SHA because `GITHUB_TOKEN`-created PRs do not trigger normal `pull_request` workflows. A green check or configuration declaration never substitutes for live GitHub branch protection. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
 
 The active `repo.versioning.mode` is `tags`: there is no required `VERSION` file. On push to `main`, resolve a SemVer tag already pointing at that commit or compute the next patch release tag. Tags must never move to a different commit. The release job generates five host-specific archives plus checksums from the merged source and publishes them. Existing published asset bytes must match fresh builds on reruns; mismatches are errors, not grounds for overwriting an immutable release.
 

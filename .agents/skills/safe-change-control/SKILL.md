@@ -1,6 +1,6 @@
 ---
 name: safe-change-control
-description: Assess irreversible or sensitive repository, infrastructure, security, release, credential and installation operations.
+description: Use before destructive or sensitive operations involving production state, credentials, releases, migrations or history. Skip reversible routine edits with no elevated risk.
 ---
 
 # Safe Change Control

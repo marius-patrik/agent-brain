@@ -35,7 +35,7 @@ _Source: [0001-single-document-source.md](decisions/0001-single-document-source.
 
 ### Decision
 
-`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
+`development` integrates changes and `main` is the release branch. Only a PR sourced from this repository's `development` may target `main`. The release-promotion workflow attempts to create a GitHub Actions bot-authored PR, allowing an independent human owner review. It **cannot operate** until the repository administrator enables GitHub Actions to create pull requests; a user-authored promotion cannot satisfy its own independent approval. When enabled, the workflow dispatches checks on the `development` head SHA because `GITHUB_TOKEN`-created PRs do not trigger normal `pull_request` workflows. A green check or configuration declaration never substitutes for live GitHub branch protection. All CI workflows live under real `.github/workflows/` paths; the branch policy workflow is supplemental and does not replace live GitHub protection.
 
 The active `repo.versioning.mode` is `tags`: there is no required `VERSION` file. On push to `main`, resolve a SemVer tag already pointing at that commit or compute the next patch release tag. Tags must never move to a different commit. The release job generates five host-specific archives plus checksums from the merged source and publishes them. Existing published asset bytes must match fresh builds on reruns; mismatches are errors, not grounds for overwriting an immutable release.
 
@@ -79,10 +79,81 @@ _Source: [0003-agent-roles-and-skills.md](decisions/0003-agent-roles-and-skills.
 
 `.agents/` and `.github/` are real, independent Git directories. `.agents/` owns project requirements, decisions, published notes, contributor rules, reusable roles, distributed policy and Agent Skills. `.github/` owns native workflow definitions, packaging/release scripts, and all repository tests and fixtures under `.github/tests/`.
 
-`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent OS ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
+`.darkfactory` remains the explicitly pinned root submodule of `marius-patrik/DarkFactory` for repository automation and quality governance. It is not a consumer requirement and is excluded from published Agent Brain ZIPs. Live GitHub workflows remain physically under `.github/workflows/`; a symlink cannot replace GitHub's native workflow tree.
 
 ### Consequences
 
 Changes to a local workflow, repo configuration or submodule pin require review and verification. Packaging is owned solely by `.github/scripts/build_bundles.py`. Do not copy tests, credentials, repository metadata, or the submodule into release archives. All tests remain in `.github/tests/`.
 
 _Source: [0004-single-darkfactory-root.md](decisions/0004-single-darkfactory-root.md)_
+
+
+## Agent Brain repository and package identity
+
+### Decision
+
+The repository is `marius-patrik/agent-brain`. Publish future releases using `agent-brain` as the manifest name and ZIP filename prefix for every supported agent host. Previously published release tags and assets remain immutable; no alias or transitional production implementation is introduced.
+
+Synchronize the actual GitHub repository name with `repo.dfconfig.repo.identity.repo`, the managed DarkFactory installation receipt slug and its source hashes, the compiler package identity, the host installation smoke tests, the README and the release catalog. A repository rename does not implicitly rename an independent GitHub Projects board; the configured board and project title must reflect its real live name, not a guessed rename.
+
+### Consequences
+
+Generated documents change only through canonical source records. A version bump is generated from `main` on release, with a new set of assets. Asset names and package identity must match, while all five host-specific installation contracts remain independently verified.
+
+_Source: [0005-agent-brain-identity.md](decisions/0005-agent-brain-identity.md)_
+
+
+## Four evidence-gated quality and focus capabilities
+
+### Ownership
+
+`quality-without-slop` supplies **artifact-specific review criteria** for code, UI and prose; `critical-review` identifies concrete defects and `verify-and-finish` establishes observed postconditions. Do not launch unsolicited design changes or use style bans as tests.
+
+`focus-support` is **opt-in reply presentation** only. It cannot infer ADHD or other health information from prompts. It does not alter the agent's programming capability, authority, permissions, or safety rules.
+
+`focus-continuity` owns the **active goal and recovery process**, but not a new state store or scheduler. The established `adaptive-plan`, `context-handoff`, and project issue/plan records remain the sole owners of plans, handoffs and backlog.
+
+`divergent-ideation` owns **bounded exploration before consequential ambiguous decisions**; the existing `bounded-delegation` controls agents, `adaptive-plan` controls delivery, and `systematic-debugging` controls deterministic fault reproduction. Default to at most three candidates and one critique pass, with no unapproved paid-model calls.
+
+All four are original standard `SKILL.md` procedures shipped via the existing sorted allowlist and release compiler; do not add host-specific duplicate skill bodies or executable frameworks.
+
+### Evidence and activation gates
+
+- An explicit user request is necessary for `focus-support`; an unrelated mention of ADHD is a negative trigger.
+- `focus-continuity` is appropriate for interrupted/multi-session tasks, not routine factual or one-step work.
+- `divergent-ideation` requires real uncertainty and a bounded decision budget, not an already accepted fix.
+- `quality-without-slop` requires a real artifact whose quality can be checked against the task, not generic aesthetic preferences.
+- Independent tests for activation, nonactivation, task success, safety and resource cost are necessary before claiming measurable improvements. A routing fixture and passing host package tests alone do not establish agent performance.
+
+### Rationale
+
+Separate interaction, state continuity, exploration, and quality review without overlapping infrastructure. Use existing host delegation, repository evidence, and natural task triggers rather than a speculative agent controller.
+
+_Source: [0006-quality-and-focus.md](decisions/0006-quality-and-focus.md)_
+
+
+## Complete the creation, evolution, and evidence boundaries
+
+### Decision
+
+The distributed catalog must cover **authoring** and **assessing** artifacts without overlapping ownership:
+
+| Responsibility | Single owner | Other owners |
+| --- | --- | --- |
+| Design and implement task-fit accessible UI flows | `interface-craft` | `quality-without-slop` reviews; `behavioral-testing` tests |
+| Maintain invariants over repeated evolving requirements | `change-resilience` | `adaptive-plan` sequences; `verify-and-finish` verifies |
+| Verify research claims against original evidence | `source-fidelity` | `context-and-tools` retrieves and selects sources |
+| Define coherent coupled API, data and state contracts | `contract-first-integration` | `orient-and-contract` defines scope; implementation applies it |
+| Perform critical artifact-quality review | `quality-without-slop` | `critical-review` reports independent defects |
+| Offer action-first low-cognitive-load replies | `focus-support` | user must explicitly opt in |
+| Recover an active goal after interruption | `focus-continuity` | `context-handoff` owns the handoff artifact |
+
+No new persistent process, personal-health inference, remote agent service, or separate issue/task tracker is part of this architecture. All capabilities use the existing sorted allowlist, native host packaging and distinct positive/negative activation conditions.
+
+Three redundant **repository-only** skill procedures (`repository-orientation`, `implementation-verification`, `independent-review`) were retired. Their actual local Git/CI/test/review requirements now live in the active repository rules and role briefs. The portable procedures `orient-and-contract`, `behavioral-testing`, `critical-review` and `verify-and-finish` remain the single workflow owners, while `governed-release` owns repository release checks. Skill-routing tests from PR #21 must accept the retired paths, not resurrect parallel instructions.
+
+### Evaluation and safety
+
+Single-shot task success does not demonstrate extension stability, installed skills do not demonstrate correct model routing, and research publications do not prove uplift for this product. Compare matched baseline and bundle runs, independently validate outcomes, and check privacy, cost and undesired triggering. Preserve user approvals and live release restrictions.
+
+_Source: [0007-quality-creation-evidence.md](decisions/0007-quality-creation-evidence.md)_

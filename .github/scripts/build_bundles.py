@@ -17,33 +17,54 @@ SKILLS = ROOT / ".agents/skills"
 HOSTS = ("open-agents", "codex", "claude", "pi", "dsh")
 TAG = re.compile(r"v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)\Z")
 TIMESTAMP = (2020, 1, 1, 0, 0, 0)
+# Instruction/reference resources only. Executable or active-content formats are not shipped.
+ALLOWED_RESOURCE_SUFFIXES = frozenset({".md", ".txt", ".json", ".yaml", ".yml", ".csv", ".png", ".jpg", ".jpeg", ".gif", ".webp"})
+
+def read_trusted_source(path: Path) -> bytes:
+    """Refuse symlinks and executable source files before reading their bytes."""
+    if path.is_symlink() or not path.is_file() or path.stat().st_mode & 0o111:
+        raise ValueError(f"Unsafe bundled source: {path}")
+    return path.read_bytes()
 
 
 def canonical() -> tuple[list[str], dict[str, bytes]]:
-    names = json.loads((SOURCE / "bundle.json").read_text(encoding="utf-8"))["skills"]
+    if SOURCE.is_symlink() or SKILLS.is_symlink() or (SOURCE / "roles").is_symlink():
+        raise ValueError("Bundled source directories must not be symlinks")
+    names = json.loads(read_trusted_source(SOURCE / "bundle.json"))["skills"]
     if not names or names != sorted(set(names)):
         raise ValueError("Skill allowlist must be sorted, nonempty and unique")
-    files = {"AGENTS.md": (SOURCE / "AGENTS.md").read_bytes()}
+    files = {"AGENTS.md": read_trusted_source(SOURCE / "AGENTS.md")}
     if not files["AGENTS.md"].strip():
         raise ValueError("Empty agent operating contract")
     for name in names:
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
             raise ValueError(f"Invalid skill name: {name}")
         root = SKILLS / name
-        skill = (root / "SKILL.md").read_text(encoding="utf-8")
+        if root.is_symlink():
+            raise ValueError(f"Unsafe skill directory symlink: {root}")
+        skill = read_trusted_source(root / "SKILL.md").decode("utf-8")
         if not re.match(r"(?s)\A---\nname: " + re.escape(name) + r"\ndescription: [^\n]+\n", skill):
             raise ValueError(f"Invalid Agent Skills name/description: {name}")
         if "\n---\n" not in skill[4:]:
             raise ValueError(f"Unclosed frontmatter: {name}")
         for file in sorted(root.rglob("*")):
+            relative = file.relative_to(root)
             if file.is_symlink():
                 raise ValueError(f"Unsafe symlink: {file}")
+            if any(part.startswith(".") for part in relative.parts):
+                raise ValueError(f"Hidden skill resource is not distributable: {file}")
             if file.is_file():
-                files[f"skills/{name}/{file.relative_to(root).as_posix()}"] = file.read_bytes()
+                if file.suffix.lower() not in ALLOWED_RESOURCE_SUFFIXES:
+                    raise ValueError(f"Unsupported skill resource format: {file}")
+                if file.stat().st_mode & 0o111:
+                    raise ValueError(f"Executable skill resource is not distributable: {file}")
+                files[f"skills/{name}/{relative.as_posix()}"] = read_trusted_source(file)
     for file in sorted((SOURCE / "roles").glob("*.md")):
-        files[f"roles/{file.name}"] = file.read_bytes()
-    files["SOURCES.md"] = (SOURCE / "SOURCES.md").read_bytes()
-    files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
+        if file.is_symlink() or not file.is_file():
+            raise ValueError(f"Unsafe role reference: {file}")
+        files[f"roles/{file.name}"] = read_trusted_source(file)
+    files["SOURCES.md"] = read_trusted_source(SOURCE / "SOURCES.md")
+    files["LICENSE"] = read_trusted_source(ROOT / "LICENSE")
     return names, files
 
 
@@ -62,7 +83,7 @@ def compiled(host: str, tag: str, names: list[str], source: dict[str, bytes]) ->
         path = ".agents/" + key if key.startswith("skills/") and host in ("open-agents", "dsh") else key
         contents[path] = value
     contents["INSTALL.md"] = (
-        f"# agent-os / {host}\n\n{INSTALL[host]}\n\n"
+        f"# agent-brain / {host}\n\n{INSTALL[host]}\n\n"
         "No runtime, daemon, MCP server, credentials or executable plugin is installed.\n"
         "Use only within existing host security and approval policy.\n"
         "This candidate has NOT demonstrated performance improvement in agent task benchmarks.\n"
@@ -71,25 +92,25 @@ def compiled(host: str, tag: str, names: list[str], source: dict[str, bytes]) ->
     if host == "codex":
         contents["plugin.json"] = (json.dumps({
             "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-            "name": "agent-os", "version": ver,
+            "name": "agent-brain", "version": ver,
             "description": "Portable, original coding-agent quality skills."
         }, indent=2) + "\n").encode()
     elif host == "claude":
         contents[".claude-plugin/plugin.json"] = (json.dumps({
-            "name": "agent-os", "version": ver,
+            "name": "agent-brain", "version": ver,
             "author": {"name": "Patrik Marius"},
             "description": "Original coding-agent quality skills."
         }, indent=2) + "\n").encode()
     elif host == "pi":
         contents["package.json"] = (json.dumps({
-            "name": "agent-os-pi", "version": ver, "private": True,
+            "name": "agent-brain-pi", "version": ver, "private": True,
             "keywords": ["pi-package"], "pi": {"skills": ["./skills"]},
             "description": "Quality skill bundle for Pi."
         }, indent=2) + "\n").encode()
     contents["BUNDLE-MANIFEST.json"] = (json.dumps({
-        "name": "agent-os", "version": ver, "platform": host,
+        "name": "agent-brain", "version": ver, "platform": host,
         "skills": names, "evidence": "not-benchmarked",
-        "source": "https://github.com/marius-patrik/agent-os"
+        "source": "https://github.com/marius-patrik/agent-brain"
     }, sort_keys=True, indent=2) + "\n").encode()
     return contents
 
@@ -114,7 +135,7 @@ def build(tag: str, out: Path) -> list[Path]:
     out.mkdir(parents=True, exist_ok=True)
     assets = []
     for host in HOSTS:
-        path = out / f"agent-os-{host}-{tag}.zip"
+        path = out / f"agent-brain-{host}-{tag}.zip"
         path.write_bytes(zipped(compiled(host, tag, names, sources)))
         assets.append(path)
     (out / "SHA256SUMS").write_text(

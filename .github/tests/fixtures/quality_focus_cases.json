@@ -1,0 +1,455 @@
+{
+  "schema": "agent-brain-routing-cases-v1",
+  "status": "specification-only-not-agent-evaluation",
+  "scoring": "After host-native trial, independently assess whether route/exclude and criterion hold. This JSON does not measure accuracy.",
+  "cases": [
+    {
+      "id": "q-code-1",
+      "request": "Review this 140-line patch: it adds three wrappers for an existing fetch function and duplicates retry handling. Identify unnecessary changes without altering required behavior.",
+      "route": [
+        "quality-without-slop"
+      ],
+      "exclude": [
+        "focus-support",
+        "divergent-ideation"
+      ],
+      "criterion": "Point to duplicated behavior; propose the smallest evidence-backed correction, not a full rewrite."
+    },
+    {
+      "id": "q-ui-2",
+      "request": "Audit the checkout form against this established design system, including keyboard focus and the failed-payment state.",
+      "route": [
+        "quality-without-slop"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Check design fit, keyboard behavior and failure states; do not ban styles categorically."
+    },
+    {
+      "id": "q-prose-3",
+      "request": "Edit this technical article so quotes match the supplied sources and repetitive sentences are removed without changing factual meaning.",
+      "route": [
+        "quality-without-slop"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Validate source fidelity and retain necessary nuance; no invented quotations."
+    },
+    {
+      "id": "q-code-4",
+      "request": "An AI-generated refactor passes tests but doubles exported API surface. Critically review maintainability against the requirements.",
+      "route": [
+        "quality-without-slop",
+        "critical-review"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Report measurable unnecessary surface and distinguish objectively required code from subjective style."
+    },
+    {
+      "id": "n-q-math",
+      "request": "What is the derivative of x squared? Answer directly.",
+      "route": [],
+      "exclude": [
+        "quality-without-slop",
+        "divergent-ideation",
+        "focus-continuity",
+        "focus-support"
+      ],
+      "criterion": "Answer a direct factual question without an artifact quality review."
+    },
+    {
+      "id": "n-q-design",
+      "request": "The existing CSS meets the brand guide. Please fix only this confirmed one-character typo.",
+      "route": [],
+      "exclude": [
+        "quality-without-slop",
+        "divergent-ideation"
+      ],
+      "criterion": "Do not introduce a redesign or unrelated cleanup."
+    },
+    {
+      "id": "f-positive-1",
+      "request": "Please reply in ADHD-friendly format: action first, then only the blocker and one next step.",
+      "route": [
+        "focus-support"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Lead with accurate action and status; no time estimates or unwanted options."
+    },
+    {
+      "id": "f-positive-2",
+      "request": "Use low-cognitive-load formatting for this answer, but include the full technical explanation below a short summary.",
+      "route": [
+        "focus-support"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Preserve detailed technical content while making the result easy to scan."
+    },
+    {
+      "id": "f-positive-3",
+      "request": "For our messages, keep a single visible next action and separate verified outcomes from blockers. This is my preferred format.",
+      "route": [
+        "focus-support"
+      ],
+      "exclude": [],
+      "criterion": "Honor established user-selected format without medical inferences."
+    },
+    {
+      "id": "n-f-research",
+      "request": "Research how ADHD accommodations are studied in university classes; this is a literature review, not a communication preference.",
+      "route": [],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Discuss research without implying that the user's communication style must change."
+    },
+    {
+      "id": "n-f-frustration",
+      "request": "Your last code diff is wrong. Fix the null pointer and provide the error trace.",
+      "route": [],
+      "exclude": [
+        "focus-support",
+        "divergent-ideation"
+      ],
+      "criterion": "Fix error directly, no diagnosis or obligatory special formatting."
+    },
+    {
+      "id": "n-f-depth",
+      "request": "Give me a comprehensive technical explanation of persistent memory systems with rigorous definitions.",
+      "route": [],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Do not shorten or change style merely because technical detail is complex."
+    },
+    {
+      "id": "c-positive-1",
+      "request": "Resume yesterday's unfinished PR. Check branch and CI, recover accepted decisions, and finish the originally agreed scope.",
+      "route": [
+        "focus-continuity",
+        "context-handoff"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Revalidate live state and resume the first incomplete acceptance criterion."
+    },
+    {
+      "id": "c-positive-2",
+      "request": "We are halfway through a multi-stage migration; a tempting unrelated refactor appeared. Park it and keep the migration objective in view.",
+      "route": [
+        "focus-continuity"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Record secondary discovery once; don't distract from active objective."
+    },
+    {
+      "id": "c-positive-3",
+      "request": "Prepare a secure handoff so another session can continue this long implementation without losing the verified state.",
+      "route": [
+        "focus-continuity",
+        "context-handoff"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Record revision, tests, blockers and next action without secrets or sensitive traits."
+    },
+    {
+      "id": "n-c-simple",
+      "request": "Rename one constant and update its single use; nothing else is in scope.",
+      "route": [],
+      "exclude": [
+        "focus-continuity",
+        "divergent-ideation"
+      ],
+      "criterion": "No parallel task tracker or special continuation workflow."
+    },
+    {
+      "id": "n-c-summary",
+      "request": "What was the final result of the already completed deployment? Just read the release status.",
+      "route": [],
+      "exclude": [
+        "focus-continuity",
+        "divergent-ideation"
+      ],
+      "criterion": "Report observed status without creating an unnecessary ongoing objective."
+    },
+    {
+      "id": "d-positive-1",
+      "request": "We must choose among fundamentally different queue partitioning architectures; compare plausible approaches, risks and cost before deciding.",
+      "route": [
+        "divergent-ideation"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Compare bounded alternatives against equal criteria and converge on evidence."
+    },
+    {
+      "id": "d-positive-2",
+      "request": "Three different fixes have failed for this race condition. Explore different mechanisms, attempt to falsify each, then recommend one.",
+      "route": [
+        "divergent-ideation",
+        "systematic-debugging"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Develop discriminating hypotheses and bounded exploration with a concrete next test."
+    },
+    {
+      "id": "d-positive-3",
+      "request": "Brainstorm materially different accessible navigation patterns for this new UI; rank them against user tasks and implementation cost.",
+      "route": [
+        "divergent-ideation"
+      ],
+      "exclude": [],
+      "criterion": "Explore distinct design trade-offs and avoid invented numerical certainty."
+    },
+    {
+      "id": "n-d-fix",
+      "request": "The approved bug fix is to replace the incorrect > comparison with >= on the specified line. Implement it and test.",
+      "route": [],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Do not brainstorm competing architecture after user accepted a deterministic fix."
+    },
+    {
+      "id": "n-d-budget",
+      "request": "Choose a known algorithm for sorting ten numbers, without using extra agent calls or paid models.",
+      "route": [],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Do not spawn extra agents or inflate decision costs."
+    },
+    {
+      "id": "ui-build-1",
+      "request": "Build a complete checkout interface consistent with our existing UI design tokens, including error, empty and loading states.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "quality-without-slop",
+        "source-fidelity"
+      ],
+      "criterion": "Implement coherent task-focused flows and exercise actual interactions, not just draw a mockup."
+    },
+    {
+      "id": "ui-build-2",
+      "request": "Implement the new responsive file-explorer screen, with keyboard navigation and accessible collapsed sidebar behavior.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Use existing components and verify collapsed, resized and keyboard-accessible states."
+    },
+    {
+      "id": "ui-build-3",
+      "request": "Design a novel scheduling interface from three real product references, then implement it with the established component library.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Select a justified visual direction tied to the user task and verify actual interactions."
+    },
+    {
+      "id": "ui-neg-1",
+      "request": "Review an already implemented dashboard for generic visual design and inaccessible keyboard flow; do not redesign it yet.",
+      "route": [
+        "quality-without-slop"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Report objective usability defects as an audit without unsolicited rebuilding."
+    },
+    {
+      "id": "ui-neg-2",
+      "request": "Change the misspelled string on an approved button without altering the design.",
+      "route": [],
+      "exclude": [
+        "interface-craft",
+        "change-resilience"
+      ],
+      "criterion": "Perform only the requested localized correction and avoid exploratory redesign."
+    },
+    {
+      "id": "resilience-1",
+      "request": "Extend last week's parser with another format and make sure all the earlier extensions still work without duplication.",
+      "route": [
+        "change-resilience",
+        "behavioral-testing"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Preserve all earlier functional checkpoints and minimize duplication and coupling across extensions."
+    },
+    {
+      "id": "resilience-2",
+      "request": "Refactor a state machine after five incremental features added scattered branches; keep each existing state transition correct.",
+      "route": [
+        "change-resilience"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Trace invariants and provide before/after structural and functional evidence."
+    },
+    {
+      "id": "resilience-3",
+      "request": "The same authorization rule is now duplicated in three modules after successive iterations. Correct the owner before extending again.",
+      "route": [
+        "change-resilience"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Unify actual policy ownership without unnecessary compatibility paths or behavioral regressions."
+    },
+    {
+      "id": "resilience-neg-1",
+      "request": "Explain what the word interface means, without changing code.",
+      "route": [],
+      "exclude": [
+        "change-resilience",
+        "contract-first-integration"
+      ],
+      "criterion": "Answer the factual question without starting a maintenance audit."
+    },
+    {
+      "id": "resilience-neg-2",
+      "request": "Fix one isolated typo in a comment, with no runtime or interface impact.",
+      "route": [],
+      "exclude": [
+        "change-resilience"
+      ],
+      "criterion": "Make the minimal one-line edit without proactive architectural refactoring."
+    },
+    {
+      "id": "fidelity-1",
+      "request": "Summarize two source papers with conflicting reported dataset sizes and explain which revision each number describes.",
+      "route": [
+        "source-fidelity"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "Attribute figures to the correct source revision and explain conflicting evidence."
+    },
+    {
+      "id": "fidelity-2",
+      "request": "Verify the current documented API behavior against versioned official docs rather than relying on an older blog post.",
+      "route": [
+        "source-fidelity",
+        "context-and-tools"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Validate time-sensitive claims against the actual authoritative versioned source."
+    },
+    {
+      "id": "fidelity-3",
+      "request": "Proofread this grant claim against the cited report; flag any unsupported quotations and exaggerated success claims.",
+      "route": [
+        "source-fidelity"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Trace quoted material and conclusions to source evidence without inventing support."
+    },
+    {
+      "id": "fidelity-neg-1",
+      "request": "Write an imaginative short story in a fictional universe with no factual citations.",
+      "route": [],
+      "exclude": [
+        "source-fidelity",
+        "contract-first-integration"
+      ],
+      "criterion": "Write creatively rather than launching an external evidence verification workflow."
+    },
+    {
+      "id": "fidelity-neg-2",
+      "request": "Tell me what the already attached local text says in its first sentence, with no current external research requested.",
+      "route": [],
+      "exclude": [
+        "source-fidelity"
+      ],
+      "criterion": "Answer directly from the supplied text without speculative broader sourcing."
+    },
+    {
+      "id": "contract-1",
+      "request": "Design the request and response schemas for a new authenticated multi-package API before building its server and UI clients.",
+      "route": [
+        "contract-first-integration"
+      ],
+      "exclude": [
+        "focus-support"
+      ],
+      "criterion": "State normative schema source, auth boundaries, types, errors and consumer tests before code."
+    },
+    {
+      "id": "contract-2",
+      "request": "Migrate a database field to nullable across the storage schema, API serializer and client form without contradictions.",
+      "route": [
+        "contract-first-integration",
+        "behavioral-testing"
+      ],
+      "exclude": [
+        "divergent-ideation"
+      ],
+      "criterion": "Cross-check actual schema, runtime validation, data migration and every dependent consumer."
+    },
+    {
+      "id": "contract-3",
+      "request": "Review an async payment workflow contract: retries, idempotency, state machine and failure cases across independently owned services.",
+      "route": [
+        "contract-first-integration"
+      ],
+      "exclude": [
+        "interface-craft"
+      ],
+      "criterion": "Reconcile idempotency and failure-state invariants at real provider/consumer boundaries."
+    },
+    {
+      "id": "contract-neg-1",
+      "request": "Rename an internal loop index without changing the function signature or data contract.",
+      "route": [],
+      "exclude": [
+        "contract-first-integration",
+        "divergent-ideation"
+      ],
+      "criterion": "Avoid drafting unnecessary schemas for a purely local correction."
+    },
+    {
+      "id": "contract-neg-2",
+      "request": "Improve the typography of a static page without changing APIs or persisted state.",
+      "route": [
+        "interface-craft"
+      ],
+      "exclude": [
+        "contract-first-integration"
+      ],
+      "criterion": "Keep the change at the interface surface; do not invent backend contracts."
+    }
+  ]
+}
