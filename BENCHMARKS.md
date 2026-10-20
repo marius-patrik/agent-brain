@@ -40,7 +40,7 @@ References: [SkillsBench](https://skillsbench.ai/) and [SWE-bench](https://www.s
 
 ## Quality and focus candidate evaluation
 
-The four optional capabilities are **not benchmark-proven**. A structural routing fixture can check case completeness but cannot demonstrate that a host model actually chose the right skill.
+The quality/focus candidates are **not benchmark-proven**. Only `focus-support` requires explicit user opt-in; installing the bundle does not activate it. A structural routing fixture checks case completeness but cannot demonstrate that a host model actually chose the right skill or improved outcomes.
 
 - `quality-without-slop`: on multi-change repository tasks, measure hidden functional tests, unnecessary diff surface, duplicate code, coupling/complexity growth and regression repair; for UI measure interaction/accessibility plus blind design-fit judging; for prose measure source fidelity and editing burden. Do not penalize necessary length or style by blanket heuristics.
 - `focus-support`: evaluate only when a user opts in. Score ability to find the actual next action, truthful status, completeness and time to identify a blocker. Include negative cases in which no focus mode is requested, and ensure no health inference or medical-label persistence.

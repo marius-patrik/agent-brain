@@ -9,4 +9,4 @@
 
 - [ ] Under **#2:** Evaluate no-slop, focus and other candidate skills on real matched agent tasks and negative triggers. Original delivery issue #17 is closed.
 
-- [x] Reconcile former PR #21's routing metadata and tests with the removed duplicate local skills; remaining real-model task evaluation belongs to #2.
+- [x] Reconcile former PR #21's routing metadata and tests with the removed duplicate local skills; all #22 delivery criteria are complete, with independent model-task evaluation remaining under #2.

@@ -21,7 +21,7 @@ See the [bundle distributions](https://github.com/marius-patrik/agent-brain/blob
 
 ### Quality and focus capabilities
 
-Four additional candidate skills cover artifact-specific slop prevention (`quality-without-slop`), **opt-in** action-first replies (`focus-support`), interrupted-task goal continuity (`focus-continuity`), and bounded exploration of high-uncertainty choices (`divergent-ideation`). They compose with existing review, planning, handoff and delegation skills rather than supplying separate runtimes. Focus-friendly output does not assume a diagnosis, and ideation must respect the host's cost/permission limits.
+The original quality/focus candidates cover artifact-specific slop prevention (`quality-without-slop`), **opt-in** action-first replies (`focus-support`), interrupted-task goal continuity (`focus-continuity`), and bounded exploration of high-uncertainty choices (`divergent-ideation`). Creation, evidence and integration capabilities are covered in the following section. They compose with existing review, planning, handoff and delegation skills rather than supplying separate runtimes. Focus-friendly output does not assume a diagnosis, and ideation must respect the host's cost/permission limits.
 
 These skills are compiled from the same canonical catalog. Native installation validation and task-performance benchmarks are different gates; additions to `development` are **not** published until reviewed and merged into `main`.
 
