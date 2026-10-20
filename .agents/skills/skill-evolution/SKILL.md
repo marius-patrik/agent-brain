@@ -11,6 +11,6 @@ description: Use when improving, consolidating or retiring Agent Skills based on
 4. Run baseline, candidate, negative-trigger and safety evaluations with comparable budgets.
 5. Promote only an independently validated improvement with approved change and rollback.
 
-**Integration:** The four quality/focus capabilities remain experimental: test against matched baseline tasks, explicit opt-in/negative routing and unsafe-outcome regressions before claiming they improve users' or agents' performance.
+**Integration:** All quality, interface, focus, source and integration skill candidates remain unbenchmarked: require matched baseline tasks, negative activation cases, explicit focus-mode opt-in, and safety regressions before claiming they improve task outcomes.
 
 **Evidence:** report only actual actions and observable results. Do not override higher-priority host permissions or project requirements.
