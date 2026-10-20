@@ -50,6 +50,50 @@ class PairedEvaluationTests(unittest.TestCase):
         rows=[r for i in range(60) for r in (row(i,0,"baseline",True),row(i,0,"bundle",False))]
         self.assertFalse(bench.analyze(rows)["conditions"][0]["passes_minimum_promotion_gate"])
 
+    def test_repeating_one_task_cannot_fake_independent_significance(self):
+        rows = [
+            arm
+            for trial in range(100)
+            for arm in (row("same-task", trial, "baseline", False),
+                        row("same-task", trial, "bundle", True))
+        ]
+        result = bench.analyze(rows)["conditions"][0]
+        self.assertEqual(result["pairs"], 100)
+        self.assertEqual(result["distinct_tasks"], 1)
+        self.assertIsNone(result["mcnemar_exact_p"])
+        self.assertEqual(result["task_sign_exact_p"], 1.0)
+        self.assertFalse(result["passes_minimum_promotion_gate"])
+
+    def test_uneven_repetition_cannot_dominate_task_balanced_gain(self):
+        rows = [
+            arm
+            for trial in range(100)
+            for arm in (row("repeated", trial, "baseline", False),
+                        row("repeated", trial, "bundle", True))
+        ]
+        for task in range(29):
+            rows.extend((row(task, 0, "baseline", False),
+                         row(task, 0, "bundle", False)))
+        result = bench.analyze(rows)["conditions"][0]
+        self.assertEqual(result["distinct_tasks"], 30)
+        self.assertGreater(result["trial_weighted_gain_percentage_points"], 70)
+        self.assertAlmostEqual(result["gain_percentage_points"], 100 / 30, places=2)
+        self.assertFalse(result["passes_minimum_promotion_gate"])
+
+    def test_many_independent_tasks_with_repeated_trials_can_pass(self):
+        rows = [
+            arm
+            for task in range(40)
+            for trial in range(2)
+            for arm in (row(task, trial, "baseline", False),
+                        row(task, trial, "bundle", True))
+        ]
+        result = bench.analyze(rows)["conditions"][0]
+        self.assertEqual((result["distinct_tasks"], result["pairs"]), (40, 80))
+        self.assertIsNone(result["mcnemar_exact_p"])
+        self.assertLess(result["task_sign_exact_p"], 0.05)
+        self.assertTrue(result["passes_minimum_promotion_gate"])
+
     def test_invalid_evidence_and_self_judging(self):
         with tempfile.TemporaryDirectory() as td:
             path=Path(td)/"records.jsonl"
