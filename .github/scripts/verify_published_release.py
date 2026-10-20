@@ -14,8 +14,8 @@ import zipfile
 from pathlib import Path
 
 HOSTS = frozenset({"open-agents", "codex", "claude", "pi", "dsh"})
-TAG = re.compile(r"v(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\Z")
-DIGEST = re.compile(r"[0-9a-f]{64}\\Z")
+TAG = re.compile(r"v(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
+DIGEST = re.compile(r"[0-9a-f]{64}$")
 
 
 def _assets(directory: Path) -> dict[str, Path]:
@@ -41,7 +41,7 @@ def verify(tag: str, local_dir: Path, published_dir: Path) -> dict:
         raise ValueError(f"Published release asset set differs: {sorted(set(published) ^ wanted)}")
     expected = {}
     for line in local["SHA256SUMS"].read_text(encoding="utf-8").splitlines():
-        match = re.fullmatch(r"([0-9a-f]{64})  ([^/\\\\]+)", line)
+        match = re.fullmatch(r"([0-9a-f]{64})  ([^/]+)", line)
         if match is None or match.group(2) in expected:
             raise ValueError("Malformed or duplicate SHA256SUMS entry")
         expected[match.group(2)] = match.group(1)
