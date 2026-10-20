@@ -20,19 +20,29 @@ TIMESTAMP = (2020, 1, 1, 0, 0, 0)
 # Instruction/reference resources only. Executable or active-content formats are not shipped.
 ALLOWED_RESOURCE_SUFFIXES = frozenset({".md", ".txt", ".json", ".yaml", ".yml", ".csv", ".png", ".jpg", ".jpeg", ".gif", ".webp"})
 
+def read_trusted_source(path: Path) -> bytes:
+    """Refuse symlinks and executable source files before reading their bytes."""
+    if path.is_symlink() or not path.is_file() or path.stat().st_mode & 0o111:
+        raise ValueError(f"Unsafe bundled source: {path}")
+    return path.read_bytes()
+
 
 def canonical() -> tuple[list[str], dict[str, bytes]]:
-    names = json.loads((SOURCE / "bundle.json").read_text(encoding="utf-8"))["skills"]
+    if SOURCE.is_symlink() or SKILLS.is_symlink() or (SOURCE / "roles").is_symlink():
+        raise ValueError("Bundled source directories must not be symlinks")
+    names = json.loads(read_trusted_source(SOURCE / "bundle.json"))["skills"]
     if not names or names != sorted(set(names)):
         raise ValueError("Skill allowlist must be sorted, nonempty and unique")
-    files = {"AGENTS.md": (SOURCE / "AGENTS.md").read_bytes()}
+    files = {"AGENTS.md": read_trusted_source(SOURCE / "AGENTS.md")}
     if not files["AGENTS.md"].strip():
         raise ValueError("Empty agent operating contract")
     for name in names:
         if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name):
             raise ValueError(f"Invalid skill name: {name}")
         root = SKILLS / name
-        skill = (root / "SKILL.md").read_text(encoding="utf-8")
+        if root.is_symlink():
+            raise ValueError(f"Unsafe skill directory symlink: {root}")
+        skill = read_trusted_source(root / "SKILL.md").decode("utf-8")
         if not re.match(r"(?s)\A---\nname: " + re.escape(name) + r"\ndescription: [^\n]+\n", skill):
             raise ValueError(f"Invalid Agent Skills name/description: {name}")
         if "\n---\n" not in skill[4:]:
@@ -48,13 +58,13 @@ def canonical() -> tuple[list[str], dict[str, bytes]]:
                     raise ValueError(f"Unsupported skill resource format: {file}")
                 if file.stat().st_mode & 0o111:
                     raise ValueError(f"Executable skill resource is not distributable: {file}")
-                files[f"skills/{name}/{relative.as_posix()}"] = file.read_bytes()
+                files[f"skills/{name}/{relative.as_posix()}"] = read_trusted_source(file)
     for file in sorted((SOURCE / "roles").glob("*.md")):
         if file.is_symlink() or not file.is_file():
             raise ValueError(f"Unsafe role reference: {file}")
-        files[f"roles/{file.name}"] = file.read_bytes()
-    files["SOURCES.md"] = (SOURCE / "SOURCES.md").read_bytes()
-    files["LICENSE"] = (ROOT / "LICENSE").read_bytes()
+        files[f"roles/{file.name}"] = read_trusted_source(file)
+    files["SOURCES.md"] = read_trusted_source(SOURCE / "SOURCES.md")
+    files["LICENSE"] = read_trusted_source(ROOT / "LICENSE")
     return names, files
 
 
