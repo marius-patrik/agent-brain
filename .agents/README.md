@@ -61,7 +61,7 @@ python3 .github/scripts/build_bundles.py --tag v0.0.0 --check
 python3 -m unittest discover -s .github/tests -p 'test_*.py'
 ```
 
-The repository uses **Git-tag-derived SemVer**, with no required `VERSION` file. A successful push to `main` publishes platform ZIPs and checksum file in its GitHub Release. Compare the release tag SHA and every published asset against the merged commit. Never replace an earlier release's content silently.
+The repository uses **Git-tag-derived SemVer**, with no required `VERSION` file. A successful push to `main` publishes platform ZIPs and checksum file in its GitHub Release. The release workflow checks that the tag points to the merged commit, downloads the published ZIPs and SHA256SUMS, and independently compares all six remote assets byte-for-byte with the locally validated release build. Never replace an earlier release's content silently.
 
 For skill changes, justify the trigger, run regression and negative-trigger cases, and record evidence. Structural packaging tests do not prove skill usefulness.
 
