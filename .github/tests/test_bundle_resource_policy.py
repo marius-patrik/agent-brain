@@ -69,6 +69,10 @@ class SkillResourcePolicyTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "Hidden skill resource"):
                     bundler.canonical()
                 path.unlink()
+                parent = path.parent
+                while parent != self.skill_root:
+                    parent.rmdir()
+                    parent = parent.parent
 
     def test_rejects_executable_permission_even_with_markdown_extension(self):
         target = self.skill_root / "script.md"
