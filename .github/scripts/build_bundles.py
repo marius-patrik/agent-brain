@@ -17,6 +17,8 @@ SKILLS = ROOT / ".agents/skills"
 HOSTS = ("open-agents", "codex", "claude", "pi", "dsh")
 TAG = re.compile(r"v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)\Z")
 TIMESTAMP = (2020, 1, 1, 0, 0, 0)
+# Instruction/reference resources only. Executable or active-content formats are not shipped.
+ALLOWED_RESOURCE_SUFFIXES = frozenset({".md", ".txt", ".json", ".yaml", ".yml", ".csv", ".png", ".jpg", ".jpeg", ".gif", ".webp"})
 
 
 def canonical() -> tuple[list[str], dict[str, bytes]]:
@@ -36,10 +38,17 @@ def canonical() -> tuple[list[str], dict[str, bytes]]:
         if "\n---\n" not in skill[4:]:
             raise ValueError(f"Unclosed frontmatter: {name}")
         for file in sorted(root.rglob("*")):
+            relative = file.relative_to(root)
             if file.is_symlink():
                 raise ValueError(f"Unsafe symlink: {file}")
+            if any(part.startswith(".") for part in relative.parts):
+                raise ValueError(f"Hidden skill resource is not distributable: {file}")
             if file.is_file():
-                files[f"skills/{name}/{file.relative_to(root).as_posix()}"] = file.read_bytes()
+                if file.suffix.lower() not in ALLOWED_RESOURCE_SUFFIXES:
+                    raise ValueError(f"Unsupported skill resource format: {file}")
+                if file.stat().st_mode & 0o111:
+                    raise ValueError(f"Executable skill resource is not distributable: {file}")
+                files[f"skills/{name}/{relative.as_posix()}"] = file.read_bytes()
     for file in sorted((SOURCE / "roles").glob("*.md")):
         if file.is_symlink() or not file.is_file():
             raise ValueError(f"Unsafe role reference: {file}")

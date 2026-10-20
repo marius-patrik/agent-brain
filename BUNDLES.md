@@ -12,6 +12,8 @@
 
 All archives contain `INSTALL.md`, role reference briefs, `SOURCES.md`, a `BUNDLE-MANIFEST.json` specifying the skill set and version, and the original GPL-3.0 license.
 
+**Bundled skill resource policy:** Skill directories may contain their required `SKILL.md` and inert reference/data resources (Markdown, plain text, JSON/YAML/CSV and common raster images). The compiler fails closed on hidden files/directories, executable permission bits, symlinks and unsupported/active-content file types (such as scripts, HTML and SVG). A future need for executable helpers must be explicitly designed and reviewed rather than silently packed into a release. File filtering does not replace secret scanning or source review.
+
 **Platform qualification:** Codex and Claude distributions are declarative plugins, not executable extensions. The DSH distribution is a local skill-root bundle, not a DSH plugin. Plugin installation does **not** automatically apply the project's operating contract; integrate `AGENTS.md` separately as explained inside each archive. Hosts may require their own trust and approval settings.
 
 ### Build and verification
